@@ -126,11 +126,11 @@ export default function ServicePage() {
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="inline-flex items-center text-sm text-gray-400 hover:text-white mb-4"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
@@ -138,7 +138,7 @@ export default function ServicePage() {
           <h1 className="text-4xl font-display font-bold mb-4">
             Book a Service
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl">
+          <p className="text-lg text-muted-foreground max-w-2xl">
             Expert bike servicing and repairs. Whether you're a Go-Moto rental customer 
             or bringing in your own bike, we've got you covered.
           </p>
@@ -500,10 +500,6 @@ export default function ServicePage() {
                   <div className="flex items-center gap-2 text-sm text-green-700 dark:text-green-300">
                     <CheckCircle2 className="h-4 w-4" />
                     Maintenance included
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-green-700 dark:text-green-300">
-                    <CheckCircle2 className="h-4 w-4" />
-                    Free replacement bike
                   </div>
                 </CardContent>
               </Card>

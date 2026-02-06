@@ -2,50 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+ * Go-Moto Brand Palette (extracted from gomoto.org.za)
+ * 
+ * brand.primary:        #E53935 (Red - CTA buttons, links)
+ * brand.primaryHover:   #C62828 (Darker red on hover)
+ * 
+ * neutral.background:   #FFFFFF (Light mode body)
+ * neutral.surface:      #FFFFFF (Cards)
+ * neutral.surface2:     #F5F5F5 (Muted backgrounds)
+ * neutral.textPrimary:  #212121 (Near black headings)
+ * neutral.textSecondary:#424242 (Body text)
+ * neutral.textMuted:    #757575 (Subtle text)
+ * neutral.border:       #E0E0E0 (Light borders)
+ */
+
 @layer base {
+  /* LIGHT MODE - Clean, professional white with Go-Moto red accent */
   :root {
-    --background: 220 20% 4%;
-    --foreground: 210 40% 98%;
-    --card: 220 20% 7%;
-    --card-foreground: 210 40% 98%;
-    --popover: 220 20% 7%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 40 45% 56%;
-    --primary-foreground: 220 20% 4%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 40 45% 56%;
-    --accent-foreground: 220 20% 4%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
-    --ring: 40 45% 56%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+    --primary: 1 76% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 13%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 13%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 1 76% 55%;
     --radius: 0.75rem;
+    
+    /* Go-Moto brand tokens */
+    --gomoto-primary: 1 76% 55%;
+    --surface-elevated: 0 0% 98%;
   }
 
+  /* DARK MODE - Premium deep charcoal with Go-Moto red accent */
   .dark {
-    --background: 220 20% 4%;
-    --foreground: 210 40% 98%;
-    --card: 220 20% 7%;
-    --card-foreground: 210 40% 98%;
-    --popover: 220 20% 7%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 40 45% 56%;
-    --primary-foreground: 220 20% 4%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 40 45% 56%;
-    --accent-foreground: 220 20% 4%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215 28% 17%;
-    --input: 215 28% 17%;
-    --ring: 40 45% 56%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 1 76% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 1 76% 55%;
+    
+    /* Go-Moto brand tokens */
+    --gomoto-primary: 1 76% 55%;
+    --surface-elevated: 0 0% 10%;
   }
 }
 
@@ -65,32 +90,78 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-gomoto-400 to-gomoto-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
   }
   
   .gradient-bg {
-    @apply bg-gradient-to-br from-gomoto-500 via-gomoto-600 to-gomoto-700;
+    @apply bg-gradient-to-br from-primary via-primary/90 to-primary/80;
   }
   
+  /* Light mode glass effect */
   .glass {
+    @apply bg-white/80 backdrop-blur-lg border border-black/5;
+  }
+  
+  .dark .glass {
     @apply bg-white/[0.03] backdrop-blur-lg border border-white/[0.08];
   }
   
+  /* Light mode glass card */
   .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-md border border-slate-700/50;
+    @apply bg-white/90 backdrop-blur-md border border-gray-200/50 shadow-sm;
+  }
+  
+  .dark .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-none;
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:border-gomoto-500/30 hover:-translate-y-1;
+    @apply transition-all duration-300 hover:border-primary/30 hover:-translate-y-1 hover:shadow-lg;
   }
   
+  .dark .card-hover {
+    @apply hover:shadow-none;
+  }
+  
+  /* Premium surfaces for both modes */
   .premium-surface {
+    @apply bg-gray-50;
+  }
+  
+  .dark .premium-surface {
     @apply bg-[#111827];
   }
   
   .premium-surface-2 {
+    @apply bg-gray-100;
+  }
+  
+  .dark .premium-surface-2 {
     @apply bg-[#0F172A];
   }
+}
+
+/* Date input calendar icon positioning */
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background-size: 16px 16px;
+  opacity: 0.6;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 /* Custom scrollbar */

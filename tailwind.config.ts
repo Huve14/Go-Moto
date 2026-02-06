@@ -52,24 +52,26 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        // Go-Moto premium brand colors (muted gold)
+        // Go-Moto brand colors (red from gomoto.org.za)
         gomoto: {
-          50: '#fdfaf3',
-          100: '#f9f2e0',
-          200: '#f2e4c1',
-          300: '#e9d19a',
-          400: '#d4b56d',
-          500: '#C6A15B',
-          600: '#a8864a',
-          700: '#8B6B2E',
-          800: '#6d5324',
-          900: '#5a441f',
-          950: '#332610',
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#E53935',   // Primary brand red
+          600: '#C62828',   // Hover state
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+          950: '#450a0a',
         },
-        // Premium surface colors
+        // Surface colors for light/dark modes
         surface: {
-          DEFAULT: '#111827',
-          2: '#0F172A',
+          DEFAULT: '#f9fafb',
+          2: '#f3f4f6',
+          dark: '#111827',
+          'dark-2': '#0F172A',
         },
       },
       borderRadius: {

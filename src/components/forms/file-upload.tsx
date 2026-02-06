@@ -78,9 +78,9 @@ export function FileUpload({
 
   const getFileIcon = (file: File) => {
     if (file.type.startsWith('image/')) {
-      return <ImageIcon className="h-5 w-5 text-gomoto-400" />
+      return <ImageIcon className="h-5 w-5 text-primary" />
     }
-    return <FileText className="h-5 w-5 text-slate-400" />
+    return <FileText className="h-5 w-5 text-muted-foreground" />
   }
 
   return (

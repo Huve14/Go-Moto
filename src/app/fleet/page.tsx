@@ -131,26 +131,28 @@ export default function FleetPage() {
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="inline-flex items-center text-sm text-gray-400 hover:text-white mb-4"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-6"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Link>
-          <Badge variant="secondary" className="mb-4 bg-gomoto-500/20 text-gomoto-400 border-gomoto-500/30">
-            For Business
-          </Badge>
-          <h1 className="text-4xl font-display font-bold mb-4">
-            Fleet Solutions
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl">
-            Scale your delivery operations with Go-Moto fleet management. 
-            Custom packages for businesses with 5+ bikes, including maintenance, 
-            tracking, and dedicated support.
-          </p>
+          <div className="text-center">
+            <h1 className="text-4xl font-display font-bold mb-4">
+              Fleet Solutions
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
+              Scale your delivery operations with Go-Moto fleet management. 
+              Custom packages for businesses with 5+ bikes, including maintenance, 
+              tracking, and dedicated support.
+            </p>
+            <Badge variant="secondary" className="bg-primary/20 text-primary border-primary/30">
+              For Business
+            </Badge>
+          </div>
         </div>
       </div>
 
@@ -473,7 +475,7 @@ export default function FleetPage() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-gomoto-500/10 to-gomoto-600/10 border-gomoto-500/30">
+              <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30">
                 <CardHeader>
                   <CardTitle>Trusted by Leading Brands</CardTitle>
                 </CardHeader>

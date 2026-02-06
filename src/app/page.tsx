@@ -45,38 +45,38 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-[#0B0F14] text-slate-100">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0B0F14]/50 to-[#0B0F14]" />
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gomoto-500/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gomoto-600/10 rounded-full blur-3xl" />
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/50 to-primary" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
         
         <div className="container relative mx-auto px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <Badge variant="outline" className="bg-gomoto-500/10 text-gomoto-400 border-gomoto-500/30 px-4 py-1.5">
+              <Badge variant="outline" className="bg-white/20 text-white border-white/30 px-4 py-1.5">
                 🚀 Now serving Johannesburg, Cape Town & Durban
               </Badge>
               
               <h1 className="text-4xl font-display font-bold tracking-tight sm:text-5xl lg:text-6xl">
                 Ride more.{' '}
-                <span className="gradient-text">Earn more.</span>{' '}
+                <span className="text-black">Earn more.</span>{' '}
                 Stay on the road.
               </h1>
               
-              <p className="text-lg text-slate-400 max-w-xl">
+              <p className="text-lg text-white/90 max-w-xl">
                 The operating system for bike ownership & earning. Rent, buy, or rent-to-own 
                 bikes and scooters for delivery, commuting, or fleet operations.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="xl" asChild>
+                <Button size="xl" asChild className="bg-white text-primary hover:bg-black hover:text-white">
                   <Link href="/inventory">
                     Get a Bike
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-                <Button size="xl" variant="outline" asChild className="bg-black text-white border-white/20 hover:bg-white hover:text-black">
+                <Button size="xl" variant="outline" asChild className="bg-white text-primary border-white hover:bg-white/90">
                   <Link href="/apply">
                     Apply Now
                   </Link>
@@ -85,16 +85,16 @@ export default async function HomePage() {
 
               {/* Trust Signals */}
               <div className="flex flex-wrap gap-6 pt-4">
-                <div className="flex items-center gap-2 text-sm text-slate-400">
-                  <CheckCircle2 className="h-5 w-5 text-gomoto-500" />
+                <div className="flex items-center gap-2 text-sm text-white/90">
+                  <CheckCircle2 className="h-5 w-5 text-white" />
                   <span>No credit check required</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-slate-400">
-                  <CheckCircle2 className="h-5 w-5 text-gomoto-500" />
+                <div className="flex items-center gap-2 text-sm text-white/90">
+                  <CheckCircle2 className="h-5 w-5 text-white" />
                   <span>Maintenance included</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-slate-400">
-                  <CheckCircle2 className="h-5 w-5 text-gomoto-500" />
+                <div className="flex items-center gap-2 text-sm text-white/90">
+                  <CheckCircle2 className="h-5 w-5 text-white" />
                   <span>Flexible weekly payments</span>
                 </div>
               </div>
@@ -102,24 +102,24 @@ export default async function HomePage() {
 
             {/* Hero Image/Stats */}
             <div className="relative hidden lg:block">
-              <div className="absolute -top-10 -right-10 w-72 h-72 bg-gomoto-500/20 rounded-full blur-3xl" />
-              <div className="relative z-10 bg-white/[0.03] backdrop-blur-md rounded-2xl p-8 border border-slate-700/50">
+              <div className="absolute -top-10 -right-10 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
+              <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-gomoto-400">500+</p>
-                    <p className="text-sm text-slate-500 mt-1">Active Riders</p>
+                    <p className="text-4xl font-bold text-white">500+</p>
+                    <p className="text-sm text-white/70 mt-1">Active Riders</p>
                   </div>
                   <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-gomoto-400">98%</p>
-                    <p className="text-sm text-slate-500 mt-1">On-Time Support</p>
+                    <p className="text-4xl font-bold text-white">98%</p>
+                    <p className="text-sm text-white/70 mt-1">On-Time Support</p>
                   </div>
                   <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-gomoto-400">R450</p>
-                    <p className="text-sm text-slate-500 mt-1">From /week</p>
+                    <p className="text-4xl font-bold text-white">R450</p>
+                    <p className="text-sm text-white/70 mt-1">From /week</p>
                   </div>
                   <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-gomoto-400">24hr</p>
-                    <p className="text-sm text-slate-500 mt-1">Approval Time</p>
+                    <p className="text-4xl font-bold text-white">24hr</p>
+                    <p className="text-sm text-white/70 mt-1">Approval Time</p>
                   </div>
                 </div>
               </div>
@@ -235,13 +235,13 @@ export default async function HomePage() {
       )}
 
       {/* Plans Preview */}
-      <section className="py-20 bg-[#0B0F14] text-slate-100">
+      <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl font-display font-bold mb-4">
               Choose your plan
             </h2>
-            <p className="text-slate-400">
+            <p className="text-muted-foreground">
               Flexible options designed for gig riders, commuters, and businesses.
             </p>
           </div>
@@ -250,32 +250,32 @@ export default async function HomePage() {
             {PLANS.map((plan) => (
               <Card
                 key={plan.id}
-                className={`relative bg-white/[0.03] backdrop-blur-md border-slate-700/50 ${
-                  plan.popular ? 'ring-2 ring-gomoto-500/50 border-gomoto-500/30' : ''
+                className={`relative card-hover ${
+                  plan.popular ? 'ring-2 ring-primary/50 border-primary/30' : ''
                 }`}
               >
                 {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gomoto-500 text-[#0B0F14]">
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
                     Most Popular
                   </Badge>
                 )}
                 <CardHeader className="text-center">
-                  <CardTitle className="text-slate-100">{plan.name}</CardTitle>
-                  <CardDescription className="text-slate-400">
+                  <CardTitle>{plan.name}</CardTitle>
+                  <CardDescription>
                     {plan.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="text-center">
-                    <span className="text-4xl font-bold text-slate-100">
+                    <span className="text-4xl font-bold">
                       {formatCurrency(plan.price_weekly)}
                     </span>
-                    <span className="text-slate-400">/week</span>
+                    <span className="text-muted-foreground">/week</span>
                   </div>
                   <ul className="space-y-3">
                     {plan.features.slice(0, 5).map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-slate-300">
-                        <CheckCircle2 className="h-5 w-5 text-gomoto-500 shrink-0" />
+                      <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -293,7 +293,7 @@ export default async function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="link" asChild className="text-slate-300 hover:text-gomoto-400">
+            <Button variant="link" asChild>
               <Link href="/plans">
                 Compare all plan features
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -373,8 +373,8 @@ export default async function HomePage() {
                           key={i}
                           className={`h-5 w-5 ${
                             i < testimonial.rating
-                              ? 'text-gomoto-400 fill-gomoto-400'
-                              : 'text-slate-600'
+                              ? 'text-primary fill-primary'
+                              : 'text-muted-foreground/40'
                           }`}
                         />
                       ))}
@@ -451,7 +451,7 @@ export default async function HomePage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-gomoto-700 via-gomoto-600 to-gomoto-500 text-white">
+      <section className="py-20 bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-display font-bold mb-4">
             Ready to start earning?
@@ -461,13 +461,13 @@ export default async function HomePage() {
             Apply today and get approved within 24-48 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="xl" variant="secondary" asChild className="bg-[#0B0F14] text-white hover:bg-[#0B0F14]/90">
+            <Button size="xl" variant="secondary" asChild className="bg-white text-primary hover:bg-white/90">
               <Link href="/apply">
                 Apply Now
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="xl" variant="outline" className="border-white/30 text-white hover:bg-white/10" asChild>
+            <Button size="xl" variant="outline" className="bg-white text-primary border-white hover:bg-black hover:text-white hover:border-black" asChild>
               <Link href="/inventory">
                 Browse Bikes
               </Link>

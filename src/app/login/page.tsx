@@ -29,6 +29,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -64,7 +65,7 @@ export default function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <Link href="/" className="inline-flex items-center justify-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gomoto-500 to-gomoto-600 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
               <Bike className="h-6 w-6 text-white" />
             </div>
             <span className="font-display font-bold text-xl">Go-Moto</span>
@@ -137,6 +138,53 @@ export default function LoginPage() {
                 </>
               ) : (
                 'Sign in'
+              )}
+            </Button>
+
+            <div className="relative my-4">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-card px-2 text-muted-foreground">Or</span>
+              </div>
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              size="lg"
+              disabled={isLoading}
+              onClick={async () => {
+                setIsLoading(true)
+                setError(null)
+                try {
+                  const supabase = createClient()
+                  const { error } = await supabase.auth.signInWithPassword({
+                    email: 'admin@gomoto.co.za',
+                    password: 'Admin123!',
+                  })
+                  if (error) {
+                    setError(error.message)
+                    return
+                  }
+                  router.push('/admin')
+                  router.refresh()
+                } catch (err) {
+                  setError('An unexpected error occurred. Please try again.')
+                } finally {
+                  setIsLoading(false)
+                }
+              }}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Signing in...
+                </>
+              ) : (
+                'Sign in as Admin'
               )}
             </Button>
           </form>

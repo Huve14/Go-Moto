@@ -57,14 +57,14 @@ export function ListingCard({
           
           {/* Status Badge */}
           {listing.status === 'reserved' && (
-            <Badge className="absolute top-3 left-3 bg-amber-500/90 text-[#0B0F14] border-0">
+            <Badge className="absolute top-3 left-3 bg-amber-500 text-white border-0">
               Reserved
             </Badge>
           )}
           
           {/* Featured Badge */}
           {listing.featured && (
-            <Badge className="absolute top-3 left-3 bg-gomoto-500 text-[#0B0F14] border-0">
+            <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground border-0">
               Featured
             </Badge>
           )}
@@ -92,18 +92,18 @@ export function ListingCard({
           {/* Quick Icons */}
           <div className="absolute bottom-3 left-3 flex gap-2">
             {hasDeliveryBox && (
-              <div className="p-1.5 rounded-full bg-[#0B0F14]/80 backdrop-blur-sm border border-slate-700/50" title="Delivery Box Included">
-                <Package className="h-4 w-4 text-gomoto-400" />
+              <div className="p-1.5 rounded-full bg-black/70 backdrop-blur-sm" title="Delivery Box Included">
+                <Package className="h-4 w-4 text-white" />
               </div>
             )}
             {isFuelEfficient && (
-              <div className="p-1.5 rounded-full bg-[#0B0F14]/80 backdrop-blur-sm border border-slate-700/50" title="Fuel Efficient">
-                <Fuel className="h-4 w-4 text-gomoto-400" />
+              <div className="p-1.5 rounded-full bg-black/70 backdrop-blur-sm" title="Fuel Efficient">
+                <Fuel className="h-4 w-4 text-white" />
               </div>
             )}
             {isLowMaintenance && (
-              <div className="p-1.5 rounded-full bg-[#0B0F14]/80 backdrop-blur-sm border border-slate-700/50" title="Low Maintenance">
-                <Wrench className="h-4 w-4 text-gomoto-400" />
+              <div className="p-1.5 rounded-full bg-black/70 backdrop-blur-sm" title="Low Maintenance">
+                <Wrench className="h-4 w-4 text-white" />
               </div>
             )}
           </div>
@@ -170,7 +170,7 @@ export function ListingCard({
             variant="outline"
             size="icon"
             asChild
-            className="text-gomoto-500 border-gomoto-500/30 hover:bg-gomoto-500/10 hover:border-gomoto-500/50"
+            className="text-primary border-primary/30 hover:bg-primary/10 hover:border-primary/50"
           >
             <a
               href={getWhatsAppUrl(whatsappNumber, whatsappMessage)}

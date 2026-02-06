@@ -109,13 +109,13 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <h1 className="text-4xl font-display font-bold mb-4">
               Contact Us
             </h1>
-            <p className="text-lg text-gray-300">
+            <p className="text-lg text-muted-foreground">
               Have a question or need help? We're here for you. Reach out via the form below, 
               WhatsApp, or visit one of our locations.
             </p>

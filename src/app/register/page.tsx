@@ -129,8 +129,8 @@ export default function RegisterPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <Link href="/" className="inline-flex items-center justify-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gomoto-500 to-gomoto-600 flex items-center justify-center">
-              <Bike className="h-6 w-6 text-white" />
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
+              <Bike className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="font-display font-bold text-xl">Go-Moto</span>
           </Link>

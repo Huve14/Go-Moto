@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { createClient } from '@/lib/supabase/client'
 import type { User as SupabaseUser } from '@supabase/supabase-js'
 import type { Profile } from '@/types'
@@ -23,7 +24,8 @@ const navigation = [
   { name: 'Inventory', href: '/inventory' },
   { name: 'Plans', href: '/plans' },
   { name: 'Service', href: '/service' },
-  { name: 'Sell/Trade', href: '/sell' },
+  { name: 'List Your Bike', href: '/list-your-bike' },
+  { name: 'Pricing', href: '/pricing' },
   { name: 'Fleet', href: '/fleet' },
 ]
 
@@ -102,10 +104,10 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gomoto-400 to-gomoto-600 flex items-center justify-center">
-                <span className="text-[#0B0F14] font-bold text-lg">GM</span>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
+                <span className="text-primary-foreground font-bold text-lg">GM</span>
               </div>
-              <span className="font-display text-xl font-semibold text-slate-100">Go-Moto</span>
+              <span className="font-display text-xl font-semibold text-foreground">Go-Moto</span>
             </Link>
           </div>
 
@@ -140,7 +142,8 @@ export function Navbar() {
           </div>
 
           {/* Desktop CTA + Auth */}
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
+            <ThemeToggle />
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -153,6 +156,9 @@ export function Navbar() {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuItem asChild>
                     <Link href="/account">My Account</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/seller">Seller Dashboard</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href="/account/favorites">Saved Bikes</Link>
@@ -208,10 +214,10 @@ export function Navbar() {
             >
               <div className="flex items-center justify-between">
                 <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gomoto-400 to-gomoto-600 flex items-center justify-center">
-                    <span className="text-[#0B0F14] font-bold text-lg">GM</span>
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
+                    <span className="text-primary-foreground font-bold text-lg">GM</span>
                   </div>
-                  <span className="font-display text-xl font-semibold text-slate-100">Go-Moto</span>
+                  <span className="font-display text-xl font-semibold text-foreground">Go-Moto</span>
                 </Link>
                 <button
                   type="button"

@@ -228,12 +228,12 @@ export default function InventoryPage({
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-display font-bold mb-4">
             Browse Our Inventory
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl">
+          <p className="text-lg text-muted-foreground max-w-2xl">
             Find the perfect bike or scooter for your delivery business or daily commute. 
             All bikes include maintenance and roadside assistance.
           </p>

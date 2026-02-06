@@ -114,11 +114,11 @@ export default function SellPage() {
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Header */}
-      <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="inline-flex items-center text-sm text-gray-400 hover:text-white mb-4"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
@@ -126,7 +126,7 @@ export default function SellPage() {
           <h1 className="text-4xl font-display font-bold mb-4">
             Sell or Trade Your Bike
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl">
+          <p className="text-lg text-muted-foreground max-w-2xl">
             Get a fair price for your bike. We buy all makes and models, or trade it in 
             towards a newer model. Quick valuation, hassle-free process.
           </p>

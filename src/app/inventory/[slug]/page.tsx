@@ -109,7 +109,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             {/* Title & Location */}
             <div className="mb-6">
               {listing.featured && (
-                <Badge className="mb-2 bg-gomoto-500">Featured</Badge>
+                <Badge className="mb-2 bg-primary">Featured</Badge>
               )}
               <h1 className="text-3xl font-display font-bold mb-2">
                 {listing.title}
