@@ -294,7 +294,7 @@ export default async function HomePage() {
 
           <div className="text-center mt-12">
             <Button variant="link" asChild>
-              <Link href="/plans">
+              <Link href="/pricing">
                 Compare all plan features
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>

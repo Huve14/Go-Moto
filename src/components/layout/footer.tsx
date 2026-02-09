@@ -9,7 +9,7 @@ const navigation = {
     { name: 'Electric', href: '/inventory?type=electric' },
   ],
   services: [
-    { name: 'Rental Plans', href: '/plans' },
+    { name: 'Pricing', href: '/pricing' },
     { name: 'Rent-to-Own', href: '/apply' },
     { name: 'Book Service', href: '/service' },
     { name: 'Fleet Solutions', href: '/fleet' },
