@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef, ReactNode } from 'react'
+import { useEffect, useRef, ReactNode, useCallback } from 'react'
+import { usePathname } from 'next/navigation'
 
 interface ParallaxProviderProps {
   children: ReactNode
@@ -8,8 +9,12 @@ interface ParallaxProviderProps {
 
 export function ParallaxProvider({ children }: ParallaxProviderProps) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
 
-  useEffect(() => {
+  const initializeAnimations = useCallback(() => {
+    const container = containerRef.current
+    if (!container) return
+
     const observerOptions = {
       root: null,
       rootMargin: '0px 0px -10% 0px',
@@ -24,42 +29,62 @@ export function ParallaxProvider({ children }: ParallaxProviderProps) {
       })
     }, observerOptions)
 
-    // Observe all elements with data-animate attribute
-    const container = containerRef.current
-    if (container) {
-      const animatedElements = container.querySelectorAll('[data-animate]')
-      animatedElements.forEach((el) => observer.observe(el))
-    }
-
-    // Parallax scroll effect for background elements
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      const parallaxBgs = document.querySelectorAll('.parallax-bg')
+    // Reset and observe all elements with data-animate attribute
+    const animatedElements = container.querySelectorAll('[data-animate]')
+    animatedElements.forEach((el) => {
+      // Check if element is already in viewport
+      const rect = el.getBoundingClientRect()
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0
       
-      parallaxBgs.forEach((bg) => {
-        const element = bg as HTMLElement
-        const speed = parseFloat(element.dataset.speed || '0.5')
-        element.style.transform = `translateY(${scrollY * speed}px)`
-      })
+      if (isInViewport) {
+        // Immediately animate elements already in viewport
+        el.classList.add('animate-in')
+      } else {
+        // Observe elements not yet in viewport
+        observer.observe(el)
+      }
+    })
 
-      // Floating parallax elements
-      const floatElements = document.querySelectorAll('[data-parallax]')
-      floatElements.forEach((el) => {
-        const element = el as HTMLElement
-        const speed = parseFloat(element.dataset.parallax || '0.1')
-        const direction = element.dataset.parallaxDirection || 'up'
-        const yOffset = direction === 'up' ? -scrollY * speed : scrollY * speed
-        element.style.transform = `translateY(${yOffset}px)`
-      })
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => {
-      observer.disconnect()
-      window.removeEventListener('scroll', handleScroll)
-    }
+    return observer
   }, [])
+
+  useEffect(() => {
+    // Small delay to ensure DOM is ready after navigation
+    const timer = setTimeout(() => {
+      const observer = initializeAnimations()
+      
+      // Parallax scroll effect for background elements
+      const handleScroll = () => {
+        const scrollY = window.scrollY
+        const parallaxBgs = document.querySelectorAll('.parallax-bg')
+        
+        parallaxBgs.forEach((bg) => {
+          const element = bg as HTMLElement
+          const speed = parseFloat(element.dataset.speed || '0.5')
+          element.style.transform = `translateY(${scrollY * speed}px)`
+        })
+
+        // Floating parallax elements
+        const floatElements = document.querySelectorAll('[data-parallax]')
+        floatElements.forEach((el) => {
+          const element = el as HTMLElement
+          const speed = parseFloat(element.dataset.parallax || '0.1')
+          const direction = element.dataset.parallaxDirection || 'up'
+          const yOffset = direction === 'up' ? -scrollY * speed : scrollY * speed
+          element.style.transform = `translateY(${yOffset}px)`
+        })
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true })
+
+      return () => {
+        observer?.disconnect()
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }, 50)
+
+    return () => clearTimeout(timer)
+  }, [pathname, initializeAnimations])
 
   return (
     <div ref={containerRef} className="parallax-wrapper">
