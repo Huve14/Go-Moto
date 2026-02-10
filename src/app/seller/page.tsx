@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { 
@@ -97,7 +97,7 @@ function formatDate(date: string): string {
   })
 }
 
-export default function SellerDashboardPage() {
+function SellerDashboardContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const showSuccess = searchParams.get('success') === '1'
@@ -549,5 +549,13 @@ export default function SellerDashboardPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function SellerDashboardPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin" /></div>}>
+      <SellerDashboardContent />
+    </Suspense>
   )
 }

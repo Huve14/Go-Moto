@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useForm } from 'react-hook-form'
@@ -54,7 +54,7 @@ function formatPrice(cents: number): string {
   return `R${(cents / 100).toLocaleString('en-ZA')}`
 }
 
-export default function ListYourBikePage() {
+function ListYourBikeContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const selectedPlanSlug = searchParams.get('plan')
@@ -515,5 +515,13 @@ export default function ListYourBikePage() {
         </div>
       </section>
     </div>
+  )
+}
+
+export default function ListYourBikePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin" /></div>}>
+      <ListYourBikeContent />
+    </Suspense>
   )
 }
