@@ -14,7 +14,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
 
 interface DueSubscription {
   id: string
@@ -100,7 +100,7 @@ export async function GET(request: NextRequest) {
           // Send payment due email
           try {
             const { email, name } = await getUserEmail(supabase, sub.user_id)
-            if (email) {
+            if (email && resend) {
               await resend.emails.send({
                 from: 'Go Moto <billing@gomoto.co.za>',
                 to: email,
@@ -175,7 +175,7 @@ export async function GET(request: NextRequest) {
         // Send subscription paused email
         try {
           const { email, name } = await getUserEmail(supabase, sub.user_id)
-          if (email) {
+          if (email && resend) {
             await resend.emails.send({
               from: 'Go Moto <billing@gomoto.co.za>',
               to: email,
@@ -225,7 +225,7 @@ export async function GET(request: NextRequest) {
       for (const sub of reminderSubscriptions as OverdueSubscription[]) {
         try {
           const { email, name } = await getUserEmail(supabase, sub.user_id)
-          if (email) {
+          if (email && resend) {
             await resend.emails.send({
               from: 'Go Moto <billing@gomoto.co.za>',
               to: email,
