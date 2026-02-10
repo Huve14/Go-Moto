@@ -55,7 +55,7 @@ export function Footer() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-3 text-primary-foreground hover:text-primary-foreground/80 transition-colors"
+            className="flex items-center justify-center gap-3 text-primary-foreground hover:text-primary-foreground transition-colors"
           >
             <MessageCircle className="h-6 w-6" />
             <span className="text-lg font-semibold">

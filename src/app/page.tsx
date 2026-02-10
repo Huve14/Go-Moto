@@ -64,7 +64,7 @@ export default async function HomePage() {
                 Stay on the road.
               </h1>
               
-              <p data-animate="fade-up" className="text-lg text-white/90 max-w-xl stagger-2">
+              <p data-animate="fade-up" className="text-lg text-white max-w-xl stagger-2">
                 The operating system for bike ownership & earning. Rent, buy, or rent-to-own 
                 bikes and scooters for delivery, commuting, or fleet operations.
               </p>
@@ -85,15 +85,15 @@ export default async function HomePage() {
 
               {/* Trust Signals */}
               <div className="flex flex-wrap gap-6 pt-4">
-                <div className="flex items-center gap-2 text-sm text-white/90">
+                <div className="flex items-center gap-2 text-sm text-white">
                   <CheckCircle2 className="h-5 w-5 text-white" />
                   <span>No credit check required</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-white/90">
+                <div className="flex items-center gap-2 text-sm text-white">
                   <CheckCircle2 className="h-5 w-5 text-white" />
                   <span>Maintenance included</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-white/90">
+                <div className="flex items-center gap-2 text-sm text-white">
                   <CheckCircle2 className="h-5 w-5 text-white" />
                   <span>Flexible weekly payments</span>
                 </div>
@@ -107,19 +107,19 @@ export default async function HomePage() {
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center p-4">
                     <p className="text-4xl font-bold text-white">500+</p>
-                    <p className="text-sm text-white/70 mt-1">Active Riders</p>
+                    <p className="text-sm text-white/90 mt-1">Active Riders</p>
                   </div>
                   <div className="text-center p-4">
                     <p className="text-4xl font-bold text-white">98%</p>
-                    <p className="text-sm text-white/70 mt-1">On-Time Support</p>
+                    <p className="text-sm text-white/90 mt-1">On-Time Support</p>
                   </div>
                   <div className="text-center p-4">
                     <p className="text-4xl font-bold text-white">R450</p>
-                    <p className="text-sm text-white/70 mt-1">From /week</p>
+                    <p className="text-sm text-white/90 mt-1">From /week</p>
                   </div>
                   <div className="text-center p-4">
                     <p className="text-4xl font-bold text-white">24hr</p>
-                    <p className="text-sm text-white/70 mt-1">Approval Time</p>
+                    <p className="text-sm text-white/90 mt-1">Approval Time</p>
                   </div>
                 </div>
               </div>
@@ -458,7 +458,7 @@ export default async function HomePage() {
           <h2 data-animate="fade-up" className="text-3xl font-display font-bold mb-4">
             Ready to start earning?
           </h2>
-          <p data-animate="fade-up" className="text-lg text-white/80 mb-8 max-w-xl mx-auto stagger-1">
+          <p data-animate="fade-up" className="text-lg text-white mb-8 max-w-xl mx-auto stagger-1">
             Join hundreds of riders who are already on the road with Go-Moto. 
             Apply today and get approved within 24-48 hours.
           </p>

@@ -227,7 +227,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-display font-bold mb-4">
             Ready to join the Go-Moto family?
           </h2>
-          <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+          <p className="text-lg text-primary-foreground mb-8 max-w-xl mx-auto">
             Whether you're looking to rent, rent-to-own, or buy - we're here to help you get on the road.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

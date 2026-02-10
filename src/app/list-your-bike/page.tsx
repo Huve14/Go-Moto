@@ -223,7 +223,7 @@ function ListYourBikeContent() {
           <h1 className="text-4xl font-display font-bold mb-4">
             List Your Bike on Go-Moto
           </h1>
-          <p className="text-lg text-white/90 max-w-2xl mx-auto">
+          <p className="text-lg text-white max-w-2xl mx-auto">
             Reach thousands of buyers across South Africa. Create your listing in minutes 
             and start receiving inquiries from serious buyers.
           </p>

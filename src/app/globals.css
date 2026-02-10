@@ -26,12 +26,13 @@
     --card-foreground: 0 0% 13%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
-    --primary: 1 76% 55%;
+    /* Darkened primary for WCAG AA contrast (4.5:1 on white) */
+    --primary: 1 83% 42%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 13%;
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 0 0% 35%;
     --accent: 0 0% 96%;
     --accent-foreground: 0 0% 13%;
     --destructive: 0 84% 60%;
@@ -54,12 +55,13 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
-    --primary: 1 76% 55%;
+    /* Slightly brighter primary for dark mode contrast */
+    --primary: 1 76% 58%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;
+    --muted-foreground: 0 0% 70%;
     --accent: 0 0% 15%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62% 30%;

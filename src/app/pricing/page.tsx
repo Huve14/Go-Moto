@@ -300,7 +300,7 @@ export default function PricingPage() {
           <h2 className="text-3xl font-display font-bold mb-4">
             Ready to sell your bike?
           </h2>
-          <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+          <p className="text-lg text-primary-foreground mb-8 max-w-xl mx-auto">
             Create your listing in minutes and start receiving inquiries from serious buyers.
           </p>
           <Button size="xl" variant="secondary" asChild>
