@@ -94,8 +94,8 @@ export function Navbar() {
       className={cn(
         'sticky top-0 z-50 w-full transition-all duration-300',
         scrolled
-          ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b'
-          : 'bg-transparent'
+          ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b shadow-sm'
+          : 'bg-background/80 backdrop-blur-sm'
       )}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8" aria-label="Global">
@@ -114,7 +114,7 @@ export function Navbar() {
           <div className="flex lg:hidden">
             <button
               type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
               onClick={() => setMobileMenuOpen(true)}
             >
               <span className="sr-only">Open main menu</span>
