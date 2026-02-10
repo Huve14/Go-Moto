@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/toaster'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { ThemeProvider } from '@/components/providers/theme-provider'
+import { ParallaxProvider } from '@/components/providers/parallax-provider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -75,11 +76,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <ParallaxProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </ParallaxProvider>
           <Toaster />
         </ThemeProvider>
       </body>

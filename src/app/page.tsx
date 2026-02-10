@@ -54,22 +54,22 @@ export default async function HomePage() {
         <div className="container relative mx-auto px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
-              <Badge variant="outline" className="bg-white/20 text-white border-white/30 px-4 py-1.5">
+              <Badge data-animate="fade-up" variant="outline" className="bg-white/20 text-white border-white/30 px-4 py-1.5">
                 🚀 Now serving Johannesburg, Cape Town & Durban
               </Badge>
               
-              <h1 className="text-4xl font-display font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              <h1 data-animate="fade-up" className="text-4xl font-display font-bold tracking-tight sm:text-5xl lg:text-6xl stagger-1">
                 Ride more.{' '}
                 <span className="text-black">Earn more.</span>{' '}
                 Stay on the road.
               </h1>
               
-              <p className="text-lg text-white/90 max-w-xl">
+              <p data-animate="fade-up" className="text-lg text-white/90 max-w-xl stagger-2">
                 The operating system for bike ownership & earning. Rent, buy, or rent-to-own 
                 bikes and scooters for delivery, commuting, or fleet operations.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div data-animate="fade-up" className="flex flex-col sm:flex-row gap-4 stagger-3">
                 <Button size="xl" asChild className="bg-white text-primary hover:bg-black hover:text-white">
                   <Link href="/inventory">
                     Get a Bike
@@ -101,7 +101,7 @@ export default async function HomePage() {
             </div>
 
             {/* Hero Image/Stats */}
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block" data-animate="fade-left">
               <div className="absolute -top-10 -right-10 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
               <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
                 <div className="grid grid-cols-2 gap-6">
@@ -131,7 +131,7 @@ export default async function HomePage() {
       {/* How It Works */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl font-display font-bold mb-4">
               Get on the road in 3 easy steps
             </h2>
@@ -161,7 +161,7 @@ export default async function HomePage() {
                 description: 'Pick up your bike, complete a quick orientation, and start earning on the road.',
               },
             ].map((item, index) => (
-              <Card key={index} className="relative overflow-hidden card-hover">
+              <Card key={index} data-animate="scale" className={`relative overflow-hidden card-hover stagger-${index + 1}`}>
                 <CardHeader>
                   <div className="absolute top-4 right-4 text-6xl font-bold text-muted/20">
                     {item.step}
@@ -195,7 +195,7 @@ export default async function HomePage() {
       {featuredListings.length > 0 && (
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between mb-12">
+            <div data-animate="fade-up" className="flex items-center justify-between mb-12">
               <div>
                 <h2 className="text-3xl font-display font-bold mb-2">
                   Featured Bikes
@@ -213,12 +213,13 @@ export default async function HomePage() {
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredListings.map((listing) => (
-                <ListingCard
-                  key={listing.id}
-                  listing={listing}
-                  showFavorite={false}
-                />
+              {featuredListings.map((listing, index) => (
+                <div key={listing.id} data-animate="fade-up" className={`stagger-${(index % 4) + 1}`}>
+                  <ListingCard
+                    listing={listing}
+                    showFavorite={false}
+                  />
+                </div>
               ))}
             </div>
 
@@ -237,7 +238,7 @@ export default async function HomePage() {
       {/* Plans Preview */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl font-display font-bold mb-4">
               Choose your plan
             </h2>
@@ -247,10 +248,11 @@ export default async function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {PLANS.map((plan) => (
+            {PLANS.map((plan, index) => (
               <Card
                 key={plan.id}
-                className={`relative card-hover ${
+                data-animate="scale"
+                className={`relative card-hover stagger-${index + 1} ${
                   plan.popular ? 'ring-2 ring-primary/50 border-primary/30' : ''
                 }`}
               >
@@ -306,7 +308,7 @@ export default async function HomePage() {
       {/* Why Go-Moto */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl font-display font-bold mb-4">
               Why riders choose Go-Moto
             </h2>
@@ -338,7 +340,7 @@ export default async function HomePage() {
                 description: 'Bike in for service? Get a replacement to keep earning.',
               },
             ].map((item, index) => (
-              <div key={index} className="text-center p-6">
+              <div key={index} data-animate="fade-up" className={`text-center p-6 stagger-${index + 1}`}>
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <item.icon className="h-7 w-7 text-primary" />
                 </div>
@@ -354,7 +356,7 @@ export default async function HomePage() {
       {testimonials && Array.isArray(testimonials) && testimonials.length > 0 && (
         <section className="py-20 bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto mb-16">
+            <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
               <h2 className="text-3xl font-display font-bold mb-4">
                 What our riders say
               </h2>
@@ -365,7 +367,7 @@ export default async function HomePage() {
 
             <div className="grid md:grid-cols-3 gap-8">
               {testimonials.slice(0, 3).map((testimonial: any, index: number) => (
-                <Card key={index} className="card-hover">
+                <Card key={index} data-animate="fade-up" className={`card-hover stagger-${index + 1}`}>
                   <CardContent className="pt-6">
                     <div className="flex gap-1 mb-4">
                       {[...Array(5)].map((_, i) => (
@@ -408,7 +410,7 @@ export default async function HomePage() {
         <section className="py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-12">
+              <div data-animate="fade-up" className="text-center mb-12">
                 <h2 className="text-3xl font-display font-bold mb-4">
                   Frequently asked questions
                 </h2>
@@ -417,7 +419,7 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              <Accordion type="single" collapsible className="w-full">
+              <Accordion data-animate="fade-up" type="single" collapsible className="w-full stagger-1">
                 {faqs.map((faq: any, index: number) => (
                   <AccordionItem key={index} value={`item-${index}`}>
                     <AccordionTrigger className="text-left">
@@ -453,14 +455,14 @@ export default async function HomePage() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-display font-bold mb-4">
+          <h2 data-animate="fade-up" className="text-3xl font-display font-bold mb-4">
             Ready to start earning?
           </h2>
-          <p className="text-lg text-white/80 mb-8 max-w-xl mx-auto">
+          <p data-animate="fade-up" className="text-lg text-white/80 mb-8 max-w-xl mx-auto stagger-1">
             Join hundreds of riders who are already on the road with Go-Moto. 
             Apply today and get approved within 24-48 hours.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div data-animate="fade-up" className="flex flex-col sm:flex-row gap-4 justify-center stagger-2">
             <Button size="xl" variant="secondary" asChild className="bg-white text-primary hover:bg-white/90">
               <Link href="/apply">
                 Apply Now
