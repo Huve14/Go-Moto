@@ -72,7 +72,7 @@ const PLAN_ICONS: Record<string, typeof Star> = {
 
 const PLAN_COLORS: Record<string, string> = {
   basic: 'border-border',
-  pro: 'border-primary ring-2 ring-primary/20',
+  pro: 'border-teal-400 ring-2 ring-teal-400/20',
   featured: 'border-amber-500 ring-2 ring-amber-500/20',
 }
 
@@ -80,14 +80,14 @@ export default function PricingPage() {
   const plans = PRICING_PLANS
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-background to-muted text-foreground py-20">
+      <section className="bg-background py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Badge variant="secondary" className="mb-4 bg-primary/20 text-primary border-primary/30">
+          <Badge variant="accent" className="mb-4">
             Seller Plans
           </Badge>
-          <h1 className="text-4xl font-display font-bold mb-4">
+          <h1 className="text-4xl font-display font-bold mb-4 text-foreground">
             Simple, transparent pricing
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -109,11 +109,11 @@ export default function PricingPage() {
               return (
                 <Card 
                   key={plan.id} 
-                  className={`relative ${colorClass} ${isPopular ? 'scale-105 shadow-lg' : ''}`}
+                  className={`relative glass ${colorClass} ${isPopular ? 'scale-105 shadow-lg' : ''}`}
                 >
                   {isPopular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <Badge className="bg-primary text-primary-foreground">
+                      <Badge className="bg-teal-500 text-white">
                         Most Popular
                       </Badge>
                     </div>
@@ -123,17 +123,17 @@ export default function PricingPage() {
                     <div className={`w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center ${
                       plan.slug === 'featured' 
                         ? 'bg-amber-500/20 text-amber-500' 
-                        : 'bg-primary/20 text-primary'
+                        : 'bg-teal-400/20 text-teal-400'
                     }`}>
                       <Icon className="h-6 w-6" />
                     </div>
-                    <CardTitle className="text-xl">{plan.name}</CardTitle>
-                    <CardDescription>{plan.description}</CardDescription>
+                    <CardTitle className="text-xl text-foreground">{plan.name}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{plan.description}</CardDescription>
                   </CardHeader>
                   
                   <CardContent className="text-center pb-6">
                     <div className="mb-6">
-                      <span className="text-4xl font-bold">R{plan.price}</span>
+                      <span className="text-4xl font-bold text-foreground">R{plan.price}</span>
                       <span className="text-muted-foreground">/month</span>
                     </div>
                     
@@ -141,9 +141,9 @@ export default function PricingPage() {
                       {plan.features.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start gap-2">
                           <Check className={`h-5 w-5 mt-0.5 shrink-0 ${
-                            plan.slug === 'featured' ? 'text-amber-500' : 'text-primary'
+                            plan.slug === 'featured' ? 'text-amber-500' : 'text-teal-400'
                           }`} />
-                          <span className="text-sm">{feature}</span>
+                          <span className="text-sm text-foreground/80">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -169,14 +169,14 @@ export default function PricingPage() {
 
           {/* Request a Quote Section */}
           <div className="mt-12 max-w-3xl mx-auto">
-            <Card className="bg-gradient-to-r from-muted/50 to-muted border-dashed border-2">
+            <Card className="glass border-border border-dashed border-2">
               <CardContent className="flex flex-col md:flex-row items-center justify-between gap-6 py-8">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <MessageSquare className="h-7 w-7 text-primary" />
+                  <div className="w-14 h-14 rounded-full bg-teal-400/10 flex items-center justify-center shrink-0">
+                    <MessageSquare className="h-7 w-7 text-teal-400" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold mb-1">Need a Custom Solution?</h3>
+                    <h3 className="text-xl font-semibold mb-1 text-foreground">Need a Custom Solution?</h3>
                     <p className="text-muted-foreground text-sm">
                       Dealerships, fleets, or bulk listings? Get a tailored quote for your business needs.
                     </p>
@@ -197,36 +197,36 @@ export default function PricingPage() {
       {/* Value Props */}
       <section className="py-16 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-display font-bold text-center mb-12">
+          <h2 className="text-2xl font-display font-bold text-center mb-12 text-foreground">
             Why list with Go-Moto?
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="h-8 w-8 text-primary" />
+              <div className="w-16 h-16 rounded-2xl bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
+                <TrendingUp className="h-8 w-8 text-teal-400" />
               </div>
-              <h3 className="font-semibold mb-2">Maximum Exposure</h3>
+              <h3 className="font-semibold mb-2 text-foreground">Maximum Exposure</h3>
               <p className="text-sm text-muted-foreground">
                 Reach thousands of motivated buyers actively searching for bikes like yours.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-primary" />
+              <div className="w-16 h-16 rounded-2xl bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-8 w-8 text-teal-400" />
               </div>
-              <h3 className="font-semibold mb-2">Verified Leads</h3>
+              <h3 className="font-semibold mb-2 text-foreground">Verified Leads</h3>
               <p className="text-sm text-muted-foreground">
                 All inquiries are captured and delivered to your inbox. No spam, just real buyers.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Zap className="h-8 w-8 text-primary" />
+              <div className="w-16 h-16 rounded-2xl bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
+                <Zap className="h-8 w-8 text-teal-400" />
               </div>
-              <h3 className="font-semibold mb-2">Seller Tools</h3>
+              <h3 className="font-semibold mb-2 text-foreground">Seller Tools</h3>
               <p className="text-sm text-muted-foreground">
                 Track views, manage leads, and optimize your listing with our seller dashboard.
               </p>
@@ -238,14 +238,14 @@ export default function PricingPage() {
       {/* FAQ Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-display font-bold text-center mb-12">
+          <h2 className="text-2xl font-display font-bold text-center mb-12 text-foreground">
             Frequently Asked Questions
           </h2>
           
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle className="text-lg">Can I cancel anytime?</CardTitle>
+                <CardTitle className="text-lg text-foreground">Can I cancel anytime?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm">
@@ -255,9 +255,9 @@ export default function PricingPage() {
               </CardContent>
             </Card>
             
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle className="text-lg">What happens when I sell my bike?</CardTitle>
+                <CardTitle className="text-lg text-foreground">What happens when I sell my bike?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm">
@@ -267,9 +267,9 @@ export default function PricingPage() {
               </CardContent>
             </Card>
             
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle className="text-lg">How do I receive buyer inquiries?</CardTitle>
+                <CardTitle className="text-lg text-foreground">How do I receive buyer inquiries?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm">
@@ -279,9 +279,9 @@ export default function PricingPage() {
               </CardContent>
             </Card>
             
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle className="text-lg">Can I upgrade my plan?</CardTitle>
+                <CardTitle className="text-lg text-foreground">Can I upgrade my plan?</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground text-sm">

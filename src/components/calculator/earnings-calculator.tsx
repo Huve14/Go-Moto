@@ -69,13 +69,13 @@ export function EarningsCalculator({
   }, [hoursPerWeek, platform, bikeType, kmPerWeek, weeklyPayment])
 
   return (
-    <Card className={cn('', className)}>
+    <Card className={cn('glass border-border', className)}>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Calculator className="h-5 w-5 text-primary" />
+        <CardTitle className="flex items-center gap-2 text-foreground">
+          <Calculator className="h-5 w-5 text-teal-400" />
           Earnings Calculator
         </CardTitle>
-        <CardDescription>
+        <CardDescription className="text-muted-foreground">
           Estimate your weekly earnings and see how much you could take home
         </CardDescription>
       </CardHeader>
@@ -120,8 +120,8 @@ export function EarningsCalculator({
         {/* Hours Per Week */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <Label>Hours per week</Label>
-            <span className="text-sm font-medium">{hoursPerWeek} hours</span>
+            <Label className="text-muted-foreground">Hours per week</Label>
+            <span className="text-sm font-medium text-foreground">{hoursPerWeek} hours</span>
           </div>
           <Slider
             value={[hoursPerWeek]}
@@ -140,8 +140,8 @@ export function EarningsCalculator({
         {/* Distance Per Week */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <Label>Estimated km per week</Label>
-            <span className="text-sm font-medium">{kmPerWeek} km</span>
+            <Label className="text-muted-foreground">Estimated km per week</Label>
+            <span className="text-sm font-medium text-foreground">{kmPerWeek} km</span>
           </div>
           <Slider
             value={[kmPerWeek]}
@@ -153,14 +153,14 @@ export function EarningsCalculator({
         </div>
 
         {/* Results */}
-        <div className="space-y-4 pt-4 border-t">
+        <div className="space-y-4 pt-4 border-t border-border">
           {/* Estimated Earnings */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-muted-foreground">
               <TrendingUp className="h-4 w-4" />
               <span>Estimated Weekly Earnings</span>
             </div>
-            <span className="font-semibold text-green-600">
+            <span className="font-semibold text-teal-400">
               {formatCurrency(calculations.earningsLow)} - {formatCurrency(calculations.earningsHigh)}
             </span>
           </div>
@@ -171,7 +171,7 @@ export function EarningsCalculator({
               <Fuel className="h-4 w-4" />
               <span>Fuel/Electricity Cost</span>
             </div>
-            <span className="font-semibold text-red-500">
+            <span className="font-semibold text-red-400">
               - {formatCurrency(calculations.fuelCost)}
             </span>
           </div>
@@ -182,21 +182,21 @@ export function EarningsCalculator({
               <CreditCard className="h-4 w-4" />
               <span>Weekly Bike Payment</span>
             </div>
-            <span className="font-semibold text-red-500">
+            <span className="font-semibold text-red-400">
               - {formatCurrency(calculations.weeklyPayment)}
             </span>
           </div>
 
           {/* Net Earnings */}
-          <div className="flex items-center justify-between pt-4 border-t">
+          <div className="flex items-center justify-between pt-4 border-t border-border">
             <div className="flex items-center gap-2">
-              <Wallet className="h-5 w-5 text-primary" />
-              <span className="font-semibold">Projected Net Weekly</span>
+              <Wallet className="h-5 w-5 text-teal-400" />
+              <span className="font-semibold text-foreground">Projected Net Weekly</span>
             </div>
             <span
               className={cn(
                 'text-xl font-bold',
-                calculations.netLow > 0 ? 'text-green-600' : 'text-red-600'
+                calculations.netLow > 0 ? 'text-teal-400' : 'text-red-400'
               )}
             >
               {formatCurrency(calculations.netLow)} - {formatCurrency(calculations.netHigh)}
@@ -204,7 +204,7 @@ export function EarningsCalculator({
           </div>
 
           {/* Monthly Projection */}
-          <div className="bg-muted/50 rounded-lg p-4 mt-4">
+          <div className="bg-muted border border-border rounded-lg p-4 mt-4">
             <p className="text-sm text-center text-muted-foreground">
               Monthly projection: <span className="font-semibold text-foreground">
                 {formatCurrency(calculations.netLow * 4)} - {formatCurrency(calculations.netHigh * 4)}

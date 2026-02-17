@@ -56,36 +56,36 @@ function MobileMenu({
   return createPortal(
     <div className="lg:hidden fixed inset-0 z-[9999]">
       <div
-        className="fixed inset-0 bg-black/20 backdrop-blur-sm"
+        className="fixed inset-0 bg-background/80 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="fixed inset-y-0 right-0 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 shadow-xl">
+      <div className="fixed inset-y-0 right-0 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-border shadow-2xl">
         <div className="flex items-center justify-between">
-          <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2" onClick={onClose}>
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">GM</span>
+          <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3" onClick={onClose}>
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-r from-autovent-500 to-teal-500 flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-lg">GM</span>
             </div>
-            <span className="font-display text-xl font-semibold text-foreground">Go-Moto</span>
+            <span className="font-display text-xl font-bold text-foreground">Go-Moto</span>
           </Link>
           <button
             type="button"
-            className="-m-2.5 rounded-md p-2.5 text-foreground"
+            className="-m-2.5 rounded-xl p-2.5 text-foreground hover:bg-muted transition-colors"
             onClick={onClose}
           >
             <span className="sr-only">Close menu</span>
             <X className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div className="mt-6 flow-root">
-          <div className="-my-6 divide-y divide-gray-500/10">
-            <div className="space-y-2 py-6">
+        <div className="mt-8 flow-root">
+          <div className="-my-6 divide-y divide-border">
+            <div className="space-y-1 py-6">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    '-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-muted',
-                    pathname === item.href ? 'text-primary' : 'text-foreground'
+                    '-mx-3 block rounded-xl px-4 py-3 text-base font-semibold leading-7 transition-colors',
+                    pathname === item.href ? 'text-accent bg-accent/10' : 'text-foreground hover:bg-muted'
                   )}
                   onClick={onClose}
                 >
@@ -98,7 +98,7 @@ function MobileMenu({
                 <>
                   <Link
                     href="/account"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-muted"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-foreground hover:bg-muted"
                     onClick={onClose}
                   >
                     My Account
@@ -106,7 +106,7 @@ function MobileMenu({
                   {isAdmin && (
                     <Link
                       href="/admin"
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-muted"
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-foreground hover:bg-muted"
                       onClick={onClose}
                     >
                       Admin Dashboard
@@ -117,7 +117,7 @@ function MobileMenu({
                       onSignOut()
                       onClose()
                     }}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-red-600 hover:bg-muted w-full text-left"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-red-500 hover:bg-muted w-full text-left"
                   >
                     Sign Out
                   </button>
@@ -125,13 +125,13 @@ function MobileMenu({
               ) : (
                 <Link
                   href="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-muted"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-foreground hover:bg-muted"
                   onClick={onClose}
                 >
                   Sign In
                 </Link>
               )}
-              <Button asChild className="w-full">
+              <Button asChild className="w-full bg-gradient-to-r from-autovent-500 to-teal-500">
                 <Link href="/apply" onClick={onClose}>
                   Apply Now
                 </Link>
@@ -210,21 +210,21 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          'sticky top-0 z-50 w-full transition-all duration-300',
+          'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300',
           scrolled
-            ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b shadow-sm'
-            : 'bg-background/80 backdrop-blur-sm'
+            ? 'glass shadow-xl'
+            : 'bg-transparent'
         )}
       >
         <nav className="container mx-auto px-4 sm:px-6 lg:px-8" aria-label="Global">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-20 items-center justify-between">
             {/* Logo */}
             <div className="flex lg:flex-1">
-              <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-lg">GM</span>
+              <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3 group">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-r from-autovent-500 to-teal-500 flex items-center justify-center shadow-lg group-hover:shadow-autovent-500/30 transition-all duration-300">
+                  <span className="text-white font-bold text-lg">GM</span>
                 </div>
-                <span className="font-display text-xl font-semibold text-foreground">Go-Moto</span>
+                <span className="font-display text-xl font-bold text-foreground">Go-Moto</span>
               </Link>
             </div>
 
@@ -232,7 +232,7 @@ export function Navbar() {
             <div className="flex lg:hidden">
               <button
                 type="button"
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-foreground"
+                className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-foreground hover:bg-muted transition-colors"
                 onClick={() => setMobileMenuOpen(true)}
               >
                 <span className="sr-only">Open main menu</span>
@@ -241,14 +241,16 @@ export function Navbar() {
             </div>
 
             {/* Desktop navigation */}
-            <div className="hidden lg:flex lg:gap-x-8">
+            <div className="hidden lg:flex lg:gap-x-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    'text-sm font-medium transition-colors hover:text-primary',
-                    pathname === item.href ? 'text-primary' : 'text-muted-foreground'
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300',
+                    pathname === item.href 
+                      ? 'text-accent bg-accent/10' 
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                   )}
                 >
                   {item.name}
@@ -257,18 +259,18 @@ export function Navbar() {
             </div>
 
             {/* Desktop CTA + Auth */}
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-4">
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-x-3">
               <ThemeToggle />
               {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="gap-2">
                       <User className="h-4 w-4" />
-                      <span>{profile?.full_name || user.email}</span>
+                      <span className="max-w-[120px] truncate">{profile?.full_name || user.email}</span>
                       <ChevronDown className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuContent align="end" className="w-56 glass">
                     <DropdownMenuItem asChild>
                       <Link href="/account">My Account</Link>
                     </DropdownMenuItem>
@@ -290,7 +292,7 @@ export function Navbar() {
                       </>
                     )}
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleSignOut}>
+                    <DropdownMenuItem onClick={handleSignOut} className="text-red-500">
                       Sign Out
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -300,7 +302,7 @@ export function Navbar() {
                   <Link href="/login">Sign In</Link>
                 </Button>
               )}
-              <Button asChild>
+              <Button asChild size="lg" className="bg-gradient-to-r from-autovent-500 to-teal-500 hover:shadow-autovent-500/30 border-0">
                 <Link href="/apply">Apply Now</Link>
               </Button>
             </div>

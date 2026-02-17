@@ -236,7 +236,7 @@ export function ListingFilters() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search bikes..."
-            className="pl-10"
+            className="pl-10 bg-muted border-border text-foreground placeholder:text-muted-foreground"
             defaultValue={searchParams.get('search') || ''}
             onChange={(e) => {
               const value = e.target.value
@@ -276,9 +276,9 @@ export function ListingFilters() {
               )}
             </Button>
           </SheetTrigger_>
-          <SheetContent_ side="left" className="w-[300px] sm:w-[400px]">
+          <SheetContent_ side="left" className="w-[300px] sm:w-[400px] bg-background border-border">
             <SheetHeader_>
-              <SheetTitle_>Filters</SheetTitle_>
+              <SheetTitle_ className="text-foreground">Filters</SheetTitle_>
               <SheetDescription_>
                 Narrow down your search
               </SheetDescription_>
@@ -294,41 +294,41 @@ export function ListingFilters() {
       {hasActiveFilters && (
         <div className="flex flex-wrap gap-2">
           {currentType && (
-            <Badge variant="secondary" className="gap-1">
+            <Badge variant="accent" className="gap-1">
               {BIKE_TYPES.find((t) => t.value === currentType)?.label}
-              <button onClick={() => updateFilter('type', '')}>
+              <button onClick={() => updateFilter('type', '')} className="hover:text-foreground">
                 <X className="h-3 w-3" />
               </button>
             </Badge>
           )}
           {currentBrand && (
-            <Badge variant="secondary" className="gap-1">
+            <Badge variant="accent" className="gap-1">
               {BIKE_BRANDS.find((b) => b.value === currentBrand)?.label}
-              <button onClick={() => updateFilter('brand', '')}>
+              <button onClick={() => updateFilter('brand', '')} className="hover:text-foreground">
                 <X className="h-3 w-3" />
               </button>
             </Badge>
           )}
           {currentCondition && (
-            <Badge variant="secondary" className="gap-1">
+            <Badge variant="accent" className="gap-1">
               {CONDITIONS.find((c) => c.value === currentCondition)?.label}
-              <button onClick={() => updateFilter('condition', '')}>
+              <button onClick={() => updateFilter('condition', '')} className="hover:text-foreground">
                 <X className="h-3 w-3" />
               </button>
             </Badge>
           )}
           {currentLocation && (
-            <Badge variant="secondary" className="gap-1">
+            <Badge variant="accent" className="gap-1">
               {currentLocation}
-              <button onClick={() => updateFilter('location', '')}>
+              <button onClick={() => updateFilter('location', '')} className="hover:text-foreground">
                 <X className="h-3 w-3" />
               </button>
             </Badge>
           )}
           {currentTags.map((tag) => (
-            <Badge key={tag} variant="secondary" className="gap-1">
+            <Badge key={tag} variant="accent" className="gap-1">
               {RIDER_TAGS.find((t) => t.value === tag)?.label}
-              <button onClick={() => toggleTag(tag)}>
+              <button onClick={() => toggleTag(tag)} className="hover:text-foreground">
                 <X className="h-3 w-3" />
               </button>
             </Badge>

@@ -52,26 +52,53 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
-        // Go-Moto brand colors (red from gomoto.org.za)
-        gomoto: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#E53935',   // Primary brand red
-          600: '#C62828',   // Hover state
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
-          950: '#450a0a',
+        // Autovent-inspired dark premium palette
+        navy: {
+          50: '#f0f7ff',
+          100: '#e0efff',
+          200: '#b9dfff',
+          300: '#7cc4ff',
+          400: '#36a5ff',
+          500: '#0c85f1',
+          600: '#0068ce',
+          700: '#0052a6',
+          800: '#004689',
+          900: '#0a0f1a',
+          950: '#050810',
         },
-        // Surface colors for light/dark modes
+        // Autovent primary blue
+        autovent: {
+          50: '#eef8ff',
+          100: '#d9efff',
+          200: '#bce3ff',
+          300: '#8ed3ff',
+          400: '#59b9ff',
+          500: '#0072ff',
+          600: '#005ed4',
+          700: '#004aab',
+          800: '#003d8d',
+          900: '#003474',
+        },
+        // Autovent secondary teal
+        teal: {
+          50: '#eefff8',
+          100: '#d6ffef',
+          200: '#b0ffdf',
+          300: '#73ffc8',
+          400: '#2ffaa8',
+          500: '#02D982',
+          600: '#00b36b',
+          700: '#008d56',
+          800: '#006f45',
+          900: '#005b3a',
+        },
+        // Premium surface colors
         surface: {
-          DEFAULT: '#f9fafb',
-          2: '#f3f4f6',
-          dark: '#111827',
-          'dark-2': '#0F172A',
+          DEFAULT: '#F3F4F6',
+          2: '#E5E7EB',
+          elevated: 'hsl(var(--surface-elevated))',
+          dark: '#0a0f1a',
+          'dark-2': '#050810',
         },
       },
       borderRadius: {

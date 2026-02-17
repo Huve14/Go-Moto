@@ -26,7 +26,7 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
   
   if (sortedImages.length === 0) {
     return (
-      <div className="aspect-[4/3] bg-muted rounded-lg flex items-center justify-center">
+      <div className="aspect-[4/3] bg-muted border border-border rounded-lg flex items-center justify-center">
         <p className="text-muted-foreground">No images available</p>
       </div>
     )
@@ -46,7 +46,7 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
     <>
       <div className="space-y-4">
         {/* Main Image */}
-        <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted group">
+        <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted border border-border group">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -110,10 +110,10 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                 key={image.id}
                 onClick={() => setCurrentIndex(index)}
                 className={cn(
-                  'relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all',
+                  'relative flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all border',
                   index === currentIndex
-                    ? 'ring-2 ring-primary ring-offset-2'
-                    : 'opacity-70 hover:opacity-100'
+                    ? 'border-teal-400 ring-2 ring-teal-400/50'
+                    : 'border-white/10 opacity-70 hover:opacity-100 hover:border-white/30'
                 )}
                 aria-label={`View image ${index + 1}`}
               >

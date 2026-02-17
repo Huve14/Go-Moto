@@ -107,12 +107,12 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
+      <div className="bg-background py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
-            <h1 className="text-4xl font-display font-bold mb-4">
+            <h1 className="text-4xl font-display font-bold mb-4 text-foreground">
               Contact Us
             </h1>
             <p className="text-lg text-muted-foreground">
@@ -127,20 +127,20 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle>Send us a message</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-foreground">Send us a message</CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Fill out the form below and we'll get back to you as soon as possible.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 {isSubmitted ? (
                   <div className="text-center py-8">
-                    <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                      <CheckCircle2 className="h-10 w-10 text-green-600" />
+                    <div className="w-16 h-16 rounded-full bg-teal-400/20 flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle2 className="h-10 w-10 text-teal-400" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">Message Sent!</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-foreground">Message Sent!</h3>
                     <p className="text-muted-foreground mb-6">
                       Thank you for reaching out. We'll respond within 24 hours.
                     </p>
@@ -152,23 +152,25 @@ export default function ContactPage() {
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="name">Name *</Label>
+                        <Label htmlFor="name" className="text-foreground">Name *</Label>
                         <Input
                           id="name"
                           {...register('name')}
                           placeholder="Your name"
+                          className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                         />
                         {errors.name && (
                           <p className="text-sm text-destructive">{errors.name.message}</p>
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
+                        <Label htmlFor="email" className="text-foreground">Email *</Label>
                         <Input
                           id="email"
                           type="email"
                           {...register('email')}
                           placeholder="your@email.com"
+                          className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                         />
                         {errors.email && (
                           <p className="text-sm text-destructive">{errors.email.message}</p>
@@ -178,19 +180,20 @@ export default function ContactPage() {
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="phone">Phone *</Label>
+                        <Label htmlFor="phone" className="text-foreground">Phone *</Label>
                         <Input
                           id="phone"
                           type="tel"
                           {...register('phone')}
                           placeholder="0XX XXX XXXX"
+                          className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                         />
                         {errors.phone && (
                           <p className="text-sm text-destructive">{errors.phone.message}</p>
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label>Subject *</Label>
+                        <Label className="text-foreground">Subject *</Label>
                         <Select
                           value={watchedValues.subject}
                           onValueChange={(value) => setValue('subject', value)}
@@ -213,12 +216,13 @@ export default function ContactPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
+                      <Label htmlFor="message" className="text-foreground">Message *</Label>
                       <Textarea
                         id="message"
                         {...register('message')}
                         placeholder="How can we help you?"
                         rows={6}
+                        className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                       />
                       {errors.message && (
                         <p className="text-sm text-destructive">{errors.message.message}</p>
@@ -250,18 +254,18 @@ export default function ContactPage() {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* WhatsApp CTA */}
-            <Card className="bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800">
+            <Card className="glass border-teal-400/30 bg-teal-400/10">
               <CardHeader>
-                <CardTitle className="text-green-800 dark:text-green-200 flex items-center gap-2">
+                <CardTitle className="text-teal-400 flex items-center gap-2">
                   <MessageCircle className="h-5 w-5" />
                   Quick Response
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-green-700 dark:text-green-300 mb-4">
+                <p className="text-sm text-foreground/70 mb-4">
                   Need a faster response? Chat with us on WhatsApp for immediate assistance.
                 </p>
-                <Button className="w-full bg-green-600 hover:bg-green-700" asChild>
+                <Button className="w-full bg-teal-500 hover:bg-teal-600 text-white" asChild>
                   <a
                     href={getWhatsAppUrl(whatsappNumber, 'Hi, I have a question about Go-Moto')}
                     target="_blank"
@@ -275,33 +279,33 @@ export default function ContactPage() {
             </Card>
 
             {/* Contact Info */}
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle>General Contact</CardTitle>
+                <CardTitle className="text-foreground">General Contact</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Mail className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <Mail className="h-5 w-5 text-teal-400 mt-0.5" />
                   <div>
-                    <p className="font-medium">Email</p>
-                    <a href="mailto:hello@gomoto.co.za" className="text-sm text-primary hover:underline">
+                    <p className="font-medium text-foreground">Email</p>
+                    <a href="mailto:hello@gomoto.co.za" className="text-sm text-teal-400 hover:underline">
                       hello@gomoto.co.za
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Phone className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <Phone className="h-5 w-5 text-teal-400 mt-0.5" />
                   <div>
-                    <p className="font-medium">Phone</p>
-                    <a href="tel:+27123456789" className="text-sm text-primary hover:underline">
+                    <p className="font-medium text-foreground">Phone</p>
+                    <a href="tel:+27123456789" className="text-sm text-teal-400 hover:underline">
                       +27 12 345 6789
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Clock className="h-5 w-5 text-muted-foreground mt-0.5" />
+                  <Clock className="h-5 w-5 text-teal-400 mt-0.5" />
                   <div>
-                    <p className="font-medium">Hours</p>
+                    <p className="font-medium text-foreground">Hours</p>
                     <p className="text-sm text-muted-foreground">
                       Mon-Fri: 8am-5pm<br />
                       Sat: 8am-1pm<br />
@@ -316,13 +320,13 @@ export default function ContactPage() {
 
         {/* Locations */}
         <div className="mt-12">
-          <h2 className="text-2xl font-display font-bold mb-6">Our Locations</h2>
+          <h2 className="text-2xl font-display font-bold mb-6 text-foreground">Our Locations</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {LOCATIONS.map((location, index) => (
-              <Card key={index}>
+              <Card key={index} className="glass border-border">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5 text-primary" />
+                  <CardTitle className="flex items-center gap-2 text-foreground">
+                    <MapPin className="h-5 w-5 text-teal-400" />
                     {location.city}
                   </CardTitle>
                 </CardHeader>
@@ -332,7 +336,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-center gap-2 text-sm">
                     <Phone className="h-4 w-4 text-muted-foreground" />
-                    <a href={`tel:${location.phone.replace(/\s/g, '')}`} className="hover:text-primary">
+                    <a href={`tel:${location.phone.replace(/\s/g, '')}`} className="hover:text-teal-400 text-foreground/80">
                       {location.phone}
                     </a>
                   </div>

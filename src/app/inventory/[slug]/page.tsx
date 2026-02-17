@@ -80,13 +80,13 @@ export default async function ListingPage({ params }: ListingPageProps) {
   const specs = listing.specs as Record<string, any> || {}
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-navy-950">
       {/* Breadcrumb */}
-      <div className="bg-muted/30 border-b">
+      <div className="bg-navy-900/50 border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <Link
             href="/inventory"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-teal-400 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Inventory
@@ -109,9 +109,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
             {/* Title & Location */}
             <div className="mb-6">
               {listing.featured && (
-                <Badge className="mb-2 bg-primary">Featured</Badge>
+                <Badge variant="featured" className="mb-2">Featured</Badge>
               )}
-              <h1 className="text-3xl font-display font-bold mb-2">
+              <h1 className="text-3xl font-display font-bold mb-2 text-foreground">
                 {listing.title}
               </h1>
               <div className="flex items-center gap-4 text-muted-foreground">
@@ -130,7 +130,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             {tagLabels.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-6">
                 {tagLabels.map((tag: string) => (
-                  <Badge key={tag} variant="secondary">
+                  <Badge key={tag} variant="accent">
                     {tag}
                   </Badge>
                 ))}
@@ -138,44 +138,44 @@ export default async function ListingPage({ params }: ListingPageProps) {
             )}
 
             {/* Pricing Card */}
-            <Card className="mb-6">
+            <Card className="mb-6 glass border-border">
               <CardContent className="pt-6">
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
                     <p className="text-sm text-muted-foreground">Weekly</p>
-                    <p className="text-3xl font-bold text-primary">
+                    <p className="text-3xl font-bold text-gradient">
                       {formatCurrency(listing.price_weekly)}
                     </p>
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Monthly</p>
-                    <p className="text-2xl font-bold">
+                    <p className="text-2xl font-bold text-foreground">
                       {formatCurrency(listing.price_monthly)}
                     </p>
                   </div>
                 </div>
                 
-                <div className="flex items-center justify-between py-3 border-t border-b">
+                <div className="flex items-center justify-between py-3 border-t border-b border-border">
                   <span className="text-muted-foreground">Deposit</span>
-                  <span className="font-semibold">{formatCurrency(listing.deposit)}</span>
+                  <span className="font-semibold text-foreground">{formatCurrency(listing.deposit)}</span>
                 </div>
                 
-                <div className="flex items-center justify-between py-3 border-b">
+                <div className="flex items-center justify-between py-3 border-b border-border">
                   <span className="text-muted-foreground">Cash Price</span>
-                  <span className="font-semibold">{formatCurrency(listing.price_cash)}</span>
+                  <span className="font-semibold text-foreground">{formatCurrency(listing.price_cash)}</span>
                 </div>
 
                 <div className="mt-6 space-y-3">
-                  <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-teal-400" />
                     <span>Maintenance included</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-teal-400" />
                     <span>Roadside assistance</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <div className="flex items-center gap-2 text-sm text-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-teal-400" />
                     <span>Swap bike if unavailable</span>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="text-green-600 border-green-600 hover:bg-green-50"
+                  className="text-teal-400 border-teal-400/30 hover:bg-teal-400/10 hover:border-teal-400/50"
                   asChild
                 >
                   <a
@@ -218,73 +218,73 @@ export default async function ListingPage({ params }: ListingPageProps) {
         {/* Tabs Section */}
         <div className="mt-12">
           <Tabs defaultValue="specs">
-            <TabsList>
+            <TabsList className="bg-navy-900/50 border border-border">
               <TabsTrigger value="specs">Specifications</TabsTrigger>
               <TabsTrigger value="calculator">Earnings Calculator</TabsTrigger>
               <TabsTrigger value="description">Description</TabsTrigger>
             </TabsList>
 
             <TabsContent value="specs" className="mt-6">
-              <Card>
+              <Card className="glass border-border">
                 <CardHeader>
-                  <CardTitle>Specifications</CardTitle>
+                  <CardTitle className="text-foreground">Specifications</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
-                        <Settings className="h-5 w-5 text-muted-foreground" />
+                      <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                        <Settings className="h-5 w-5 text-teal-400" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Type</p>
-                        <p className="font-medium capitalize">{listing.type}</p>
+                        <p className="font-medium text-foreground capitalize">{listing.type}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
-                        <Gauge className="h-5 w-5 text-muted-foreground" />
+                      <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                        <Gauge className="h-5 w-5 text-teal-400" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Engine</p>
-                        <p className="font-medium">{listing.engine_cc}cc</p>
+                        <p className="font-medium text-foreground">{listing.engine_cc}cc</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
-                        <Calendar className="h-5 w-5 text-muted-foreground" />
+                      <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                        <Calendar className="h-5 w-5 text-teal-400" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Year</p>
-                        <p className="font-medium">{listing.year}</p>
+                        <p className="font-medium text-foreground">{listing.year}</p>
                       </div>
                     </div>
                     {listing.mileage && (
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
-                          <Gauge className="h-5 w-5 text-muted-foreground" />
+                        <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                          <Gauge className="h-5 w-5 text-teal-400" />
                         </div>
                         <div>
                           <p className="text-sm text-muted-foreground">Mileage</p>
-                          <p className="font-medium">{listing.mileage.toLocaleString()} km</p>
+                          <p className="font-medium text-foreground">{listing.mileage.toLocaleString()} km</p>
                         </div>
                       </div>
                     )}
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
-                        <CheckCircle2 className="h-5 w-5 text-muted-foreground" />
+                      <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                        <CheckCircle2 className="h-5 w-5 text-teal-400" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Condition</p>
-                        <p className="font-medium capitalize">{listing.condition}</p>
+                        <p className="font-medium text-foreground capitalize">{listing.condition}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
-                        <Package className="h-5 w-5 text-muted-foreground" />
+                      <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center">
+                        <Package className="h-5 w-5 text-teal-400" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Brand</p>
-                        <p className="font-medium capitalize">{listing.brand}</p>
+                        <p className="font-medium text-foreground capitalize">{listing.brand}</p>
                       </div>
                     </div>
                   </div>
@@ -292,14 +292,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
                   {/* Additional Specs */}
                   {Object.keys(specs).length > 0 && (
                     <>
-                      <Separator className="my-6" />
+                      <Separator className="my-6 bg-border" />
                       <div className="grid sm:grid-cols-2 gap-4">
                         {Object.entries(specs).map(([key, value]) => (
-                          <div key={key} className="flex justify-between py-2 border-b">
+                          <div key={key} className="flex justify-between py-2 border-b border-border">
                             <span className="text-muted-foreground capitalize">
                               {key.replace(/_/g, ' ')}
                             </span>
-                            <span className="font-medium">{String(value)}</span>
+                            <span className="font-medium text-foreground">{String(value)}</span>
                           </div>
                         ))}
                       </div>
@@ -314,9 +314,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
             </TabsContent>
 
             <TabsContent value="description" className="mt-6">
-              <Card>
+              <Card className="glass border-border">
                 <CardHeader>
-                  <CardTitle>Description</CardTitle>
+                  <CardTitle className="text-foreground">Description</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground whitespace-pre-line">
@@ -331,8 +331,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
         {/* Related Listings */}
         {relatedListings.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-2xl font-display font-bold mb-6">
-              Similar Bikes
+            <h2 className="text-2xl font-display font-bold mb-6 text-foreground">
+              Similar <span className="text-gradient">Bikes</span>
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {relatedListings.map((related) => (

@@ -7,16 +7,16 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-muted/30">
-      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
+    <div className="min-h-screen bg-background">
+      <div className="bg-background py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-display font-bold mb-4">Privacy Policy</h1>
+          <h1 className="text-4xl font-display font-bold mb-4 text-foreground">Privacy Policy</h1>
           <p className="text-muted-foreground">Last updated: January 2024</p>
         </div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="max-w-3xl mx-auto prose prose-gray dark:prose-invert">
+        <div className="max-w-3xl mx-auto prose prose-neutral dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground">
           <h2>1. Introduction</h2>
           <p>
             Go-Moto (Pty) Ltd ("we", "us", or "our") is committed to protecting your privacy. 

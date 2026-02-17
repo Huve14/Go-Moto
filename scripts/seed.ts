@@ -1,3 +1,6 @@
+
+import dotenv from 'dotenv'
+dotenv.config({ path: '.env.local' })
 // Go-Moto Database Seed Script
 // Run with: npx tsx scripts/seed.ts
 
@@ -437,7 +440,7 @@ async function seed() {
   // Seed site settings
   console.log('\n⚙️ Seeding site settings...')
   const { error: settingsError } = await supabase
-    .from('site_settings')
+    .from('settings')
     .upsert([siteSettings])
 
   if (settingsError) {

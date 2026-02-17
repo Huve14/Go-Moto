@@ -95,12 +95,12 @@ function ListingsSkeleton() {
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {[...Array(6)].map((_, i) => (
-        <div key={i} className="animate-pulse">
-          <div className="bg-muted aspect-[4/3] rounded-lg mb-4" />
-          <div className="space-y-2">
-            <div className="h-4 bg-muted rounded w-3/4" />
-            <div className="h-4 bg-muted rounded w-1/2" />
-            <div className="h-6 bg-muted rounded w-1/3" />
+        <div key={i} className="animate-pulse bg-navy-900/60 border border-white/10 rounded-2xl overflow-hidden">
+          <div className="bg-white/5 aspect-[4/3]" />
+          <div className="p-5 space-y-3">
+            <div className="h-5 bg-white/10 rounded-lg w-3/4" />
+            <div className="h-4 bg-white/10 rounded-lg w-1/2" />
+            <div className="h-8 bg-white/10 rounded-lg w-1/3" />
           </div>
         </div>
       ))}
@@ -116,7 +116,7 @@ async function ListingsGrid({ searchParams }: { searchParams: SearchParams }) {
   if (listings.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-muted-foreground mb-4">No bikes found matching your criteria.</p>
+        <p className="text-white/60 mb-4">No bikes found matching your criteria.</p>
         <Button variant="outline" asChild>
           <Link href="/inventory">Clear Filters</Link>
         </Button>
@@ -127,7 +127,7 @@ async function ListingsGrid({ searchParams }: { searchParams: SearchParams }) {
   return (
     <>
       <div className="flex items-center justify-between mb-6">
-        <p className="text-muted-foreground">
+        <p className="text-white/60">
           Showing {listings.length} of {total} bikes
         </p>
       </div>
@@ -192,7 +192,7 @@ async function ListingsGrid({ searchParams }: { searchParams: SearchParams }) {
               }
               
               if (page === currentPage - 2 || page === currentPage + 2) {
-                return <span key={page} className="px-2">...</span>
+                return <span key={page} className="px-2 text-white/50">...</span>
               }
               
               return null
@@ -226,14 +226,16 @@ export default function InventoryPage({
   searchParams: SearchParams
 }) {
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-navy-950">
       {/* Header */}
-      <div className="bg-gradient-to-br from-background to-muted text-foreground py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-display font-bold mb-4">
-            Browse Our Inventory
+      <div className="bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900 text-white py-20 relative overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-[400px] h-[400px] bg-autovent-500/15 rounded-full blur-[120px]" />
+        <div className="absolute -bottom-40 -left-40 w-[300px] h-[300px] bg-teal-500/10 rounded-full blur-[100px]" />
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Browse Our <span className="text-gradient">Inventory</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl">
+          <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
             Find the perfect bike or scooter for your delivery business or daily commute. 
             All bikes include maintenance and roadside assistance.
           </p>
@@ -241,16 +243,16 @@ export default function InventoryPage({
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="lg:grid lg:grid-cols-4 lg:gap-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="lg:grid lg:grid-cols-4 lg:gap-10">
           {/* Sidebar Filters - Desktop */}
           <aside className="hidden lg:block">
-            <div className="sticky top-24">
-              <h2 className="text-lg font-semibold mb-4">Filters</h2>
+            <div className="sticky top-24 glass border border-border p-6 rounded-2xl">
+              <h2 className="text-lg font-semibold text-foreground mb-5">Filters</h2>
               <Suspense fallback={<div className="animate-pulse space-y-4">
-                <div className="h-10 bg-muted rounded"></div>
-                <div className="h-10 bg-muted rounded"></div>
-                <div className="h-10 bg-muted rounded"></div>
+                <div className="h-10 bg-white/5 rounded-xl"></div>
+                <div className="h-10 bg-white/5 rounded-xl"></div>
+                <div className="h-10 bg-white/5 rounded-xl"></div>
               </div>}>
                 <ListingFilters />
               </Suspense>
@@ -260,8 +262,8 @@ export default function InventoryPage({
           {/* Main Content */}
           <div className="lg:col-span-3">
             {/* Mobile Filters */}
-            <div className="lg:hidden mb-6">
-              <Suspense fallback={<div className="h-10 bg-muted rounded animate-pulse"></div>}>
+            <div className="lg:hidden mb-8">
+              <Suspense fallback={<div className="h-10 bg-white/5 rounded-xl animate-pulse"></div>}>
                 <ListingFilters />
               </Suspense>
             </div>

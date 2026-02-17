@@ -3,76 +3,99 @@
 @tailwind utilities;
 
 /* 
- * Go-Moto Brand Palette (extracted from gomoto.org.za)
+ * Go-Moto Premium Design System - Autovent Inspired
+ * Light & Dark Theme System
  * 
- * brand.primary:        #E53935 (Red - CTA buttons, links)
- * brand.primaryHover:   #C62828 (Darker red on hover)
- * 
- * neutral.background:   #FFFFFF (Light mode body)
- * neutral.surface:      #FFFFFF (Cards)
- * neutral.surface2:     #F5F5F5 (Muted backgrounds)
- * neutral.textPrimary:  #212121 (Near black headings)
- * neutral.textSecondary:#424242 (Body text)
- * neutral.textMuted:    #757575 (Subtle text)
- * neutral.border:       #E0E0E0 (Light borders)
+ * PRIMARY (Blue):        #0072ff - CTAs, emphasis, primary actions
+ * SECONDARY (Teal):      #02D982 - Highlights, success, accents
  */
 
 @layer base {
-  /* LIGHT MODE - Clean, professional white with Go-Moto red accent */
+  /* LIGHT MODE - Premium Clean */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 13%;
+    --background: 0 0% 98%;
+    --foreground: 222 47% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 13%;
+    --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 13%;
-    /* Darkened primary for WCAG AA contrast (4.5:1 on white) */
-    --primary: 1 83% 42%;
+    --popover-foreground: 222 47% 11%;
+    /* Primary blue for CTAs */
+    --primary: 212 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 13%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 35%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 13%;
+    /* Teal accent */
+    --accent: 158 98% 43%;
+    --accent-foreground: 0 0% 100%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
-    --ring: 1 76% 55%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 212 100% 50%;
     --radius: 0.75rem;
     
-    /* Go-Moto brand tokens */
-    --gomoto-primary: 1 76% 55%;
-    --surface-elevated: 0 0% 98%;
+    /* Premium design tokens - LIGHT */
+    --autovent-blue: 212 100% 50%;
+    --autovent-teal: 158 98% 43%;
+    --gradient-start: 212 100% 50%;
+    --gradient-end: 158 98% 43%;
+    
+    /* Light theme specific - complete color values */
+    --nav-bg: hsl(0 0% 100%);
+    --nav-border: hsl(220 13% 91%);
+    --footer-bg: hsl(222 47% 11%);
+    --glass-bg: hsl(0 0% 100% / 0.9);
+    --glass-border: hsl(220 13% 91%);
+    --surface: hsl(220 14% 96%);
+    --surface-2: hsl(220 14% 92%);
+    --card-shadow: 0 4px 6px -1px hsl(220 14% 80% / 0.1), 0 2px 4px -2px hsl(220 14% 80% / 0.1);
+    --text-muted: hsl(220 9% 46%);
+    --text-on-dark: hsl(210 40% 98%);
   }
 
-  /* DARK MODE - Premium deep charcoal with Go-Moto red accent */
+  /* DARK MODE - Autovent premium dark scheme */
   .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 98%;
-    /* Slightly brighter primary for dark mode contrast */
-    --primary: 1 76% 58%;
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
+    /* Blue for dark mode */
+    --primary: 212 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 1 76% 55%;
+    /* Teal accent */
+    --accent: 158 98% 43%;
+    --accent-foreground: 0 0% 100%;
+    --secondary: 217 33% 12%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 20% 65%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 212 100% 50%;
     
-    /* Go-Moto brand tokens */
-    --gomoto-primary: 1 76% 55%;
-    --surface-elevated: 0 0% 10%;
+    /* Premium design tokens - DARK */
+    --autovent-blue: 212 100% 50%;
+    --autovent-teal: 158 98% 43%;
+    --gradient-start: 212 100% 50%;
+    --gradient-end: 158 98% 43%;
+    
+    /* Dark theme specific - complete color values */
+    --nav-bg: hsl(222 47% 5% / 0.95);
+    --nav-border: hsl(217 33% 18%);
+    --footer-bg: hsl(222 47% 3%);
+    --glass-bg: hsl(222 47% 5% / 0.8);
+    --glass-border: hsl(217 33% 18% / 0.5);
+    --surface: hsl(222 47% 7%);
+    --surface-2: hsl(222 47% 10%);
+    --card-shadow: 0 4px 6px -1px hsl(222 47% 2% / 0.3), 0 2px 4px -2px hsl(222 47% 2% / 0.3);
+    --text-muted: hsl(215 20% 65%);
+    --text-on-dark: hsl(210 40% 98%);
   }
 }
 
@@ -80,9 +103,26 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Smooth theme transitions - respects reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      transition-property: background-color, border-color;
+      transition-duration: 200ms;
+      transition-timing-function: ease-out;
+    }
+    
+    body, 
+    .theme-transition {
+      transition-property: background-color, color, border-color, box-shadow;
+      transition-duration: 200ms;
+      transition-timing-function: ease-out;
+    }
   }
 }
 
@@ -91,55 +131,192 @@
     text-wrap: balance;
   }
   
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
+  /* Autovent gradient text */
+  .text-gradient {
+    background: linear-gradient(to right, #0072ff, #02D982);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
   }
   
-  .gradient-bg {
-    @apply bg-gradient-to-br from-primary via-primary/90 to-primary/80;
+  /* Text outline style like Autovent */
+  .text-line {
+    -webkit-text-stroke: 1px currentColor;
+    -webkit-text-fill-color: transparent;
   }
   
-  /* Light mode glass effect */
+  /* Premium gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, #0072ff 0%, #02D982 100%);
+  }
+  
+  .gradient-dark {
+    background: linear-gradient(135deg, #0a0f1a 0%, #111827 100%);
+  }
+  
+  /* Autovent button gradient */
+  .btn-gradient {
+    @apply relative overflow-hidden text-white font-semibold;
+    background: linear-gradient(to right, #0072ff, #02D982);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px -10px rgba(0, 114, 255, 0.5);
+  }
+  
+  /* Autovent outline button */
+  .btn-line {
+    @apply relative border border-white/30 text-white bg-transparent font-semibold;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-line::after {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: linear-gradient(to right, #0072ff, #02D982);
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  .btn-line:hover {
+    @apply border-transparent;
+  }
+  
+  .btn-line:hover::after {
+    @apply opacity-100;
+  }
+  
+  /* Premium glass effect - theme aware */
   .glass {
-    @apply bg-white/80 backdrop-blur-lg border border-black/5;
+    @apply backdrop-blur-xl border;
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
   }
   
-  .dark .glass {
-    @apply bg-white/[0.03] backdrop-blur-lg border border-white/[0.08];
+  .glass-subtle {
+    @apply backdrop-blur-lg;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
   }
   
-  /* Light mode glass card */
-  .glass-card {
-    @apply bg-white/90 backdrop-blur-md border border-gray-200/50 shadow-sm;
+  /* Premium card styles - theme aware */
+  .card-premium {
+    @apply rounded-2xl backdrop-blur-sm;
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--card-shadow);
   }
   
-  .dark .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-none;
+  /* Surface utilities */
+  .surface-elevated {
+    background: var(--surface);
+    border: 1px solid var(--glass-border);
   }
   
+  .surface-muted {
+    background: var(--surface-2);
+    border: 1px solid var(--glass-border);
+  }
+  
+  /* Glow border effect */
+  .glow-border {
+    @apply relative;
+  }
+  
+  .glow-border::before {
+    content: '';
+    @apply absolute -inset-[1px] rounded-2xl opacity-0 transition-opacity duration-300;
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+    z-index: -1;
+  }
+  
+  .glow-border:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Enhanced hover effect for cards */
   .card-hover {
-    @apply transition-all duration-300 hover:border-primary/30 hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-300 hover:-translate-y-2;
   }
   
-  .dark .card-hover {
-    @apply hover:shadow-none;
+  .card-hover:hover {
+    box-shadow: 0 20px 40px -15px hsl(var(--primary) / 0.3);
   }
   
-  /* Premium surfaces for both modes */
-  .premium-surface {
-    @apply bg-gray-50;
+  /* Decorative gradient edges - theme aware */
+  .de-gradient-edge-top {
+    @apply absolute top-0 left-0 right-0 h-32 pointer-events-none;
+    background: linear-gradient(to bottom, hsl(var(--background)), transparent);
   }
   
-  .dark .premium-surface {
-    @apply bg-[#111827];
+  .de-gradient-edge-bottom {
+    @apply absolute bottom-0 left-0 right-0 h-32 pointer-events-none;
+    background: linear-gradient(to top, hsl(var(--background)), transparent);
   }
   
-  .premium-surface-2 {
-    @apply bg-gray-100;
+  /* Premium button glow */
+  .btn-glow {
+    @apply relative overflow-hidden;
   }
   
-  .dark .premium-surface-2 {
-    @apply bg-[#0F172A];
+  .btn-glow::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: radial-gradient(circle at center, hsl(var(--primary) / 0.3) 0%, transparent 70%);
+  }
+  
+  .btn-glow:hover::after {
+    @apply opacity-100;
+  }
+  
+  /* Section backgrounds - theme aware */
+  .section-dark {
+    background: var(--surface);
+  }
+  
+  .section-gradient {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, var(--surface) 100%);
+  }
+
+  /* Typography utilities */
+  .heading-xl {
+    @apply text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight uppercase;
+  }
+  
+  .heading-lg {
+    @apply text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight uppercase;
+  }
+  
+  .heading-md {
+    @apply text-2xl md:text-3xl font-display font-semibold uppercase;
+  }
+  
+  .body-lg {
+    @apply text-lg md:text-xl text-muted-foreground leading-relaxed;
+  }
+  
+  /* Autovent marquee animation */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  
+  /* Stats counter circle background */
+  .circle-gradient {
+    @apply relative flex items-center justify-center;
+  }
+  
+  .circle-gradient::before {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    background: radial-gradient(circle, rgba(0, 114, 255, 0.2) 0%, transparent 70%);
   }
 }
 

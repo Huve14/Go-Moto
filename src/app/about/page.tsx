@@ -56,15 +56,15 @@ const TEAM = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       {/* Hero */}
-      <section className="relative bg-gradient-to-br from-background to-muted text-foreground py-24">
+      <section className="relative bg-background py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-4 bg-primary/20 text-primary border-primary/30">
+            <Badge variant="accent" className="mb-4">
               Our Story
             </Badge>
-            <h1 className="text-4xl font-display font-bold mb-6">
+            <h1 className="text-4xl font-display font-bold mb-6 text-foreground">
               Making bike ownership accessible for every South African rider
             </h1>
             <p className="text-lg text-muted-foreground">
@@ -77,12 +77,12 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-12 border-b">
+      <section className="py-12 border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {STATS.map((stat, index) => (
               <div key={index} className="text-center">
-                <p className="text-4xl font-bold text-primary">{stat.value}</p>
+                <p className="text-4xl font-bold text-teal-400">{stat.value}</p>
                 <p className="text-muted-foreground">{stat.label}</p>
               </div>
             ))}
@@ -95,7 +95,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-display font-bold mb-6">
+              <h2 className="text-3xl font-display font-bold mb-6 text-foreground">
                 From rider frustration to rider freedom
               </h2>
               <div className="space-y-4 text-muted-foreground">
@@ -121,18 +121,18 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="bg-muted rounded-2xl aspect-square flex items-center justify-center">
-              <Bike className="h-32 w-32 text-muted-foreground/20" />
+            <div className="bg-muted rounded-2xl aspect-square flex items-center justify-center border border-border">
+              <Bike className="h-32 w-32 text-muted-foreground/40" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-display font-bold mb-4">
+            <h2 className="text-3xl font-display font-bold mb-4 text-foreground">
               Our Values
             </h2>
             <p className="text-muted-foreground">
@@ -142,15 +142,15 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {VALUES.map((value, index) => (
-              <Card key={index} className="text-center">
+              <Card key={index} className="text-center glass border-border">
                 <CardHeader>
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <value.icon className="h-7 w-7 text-primary" />
+                  <div className="w-14 h-14 rounded-xl bg-teal-400/10 flex items-center justify-center mx-auto mb-4">
+                    <value.icon className="h-7 w-7 text-teal-400" />
                   </div>
-                  <CardTitle>{value.title}</CardTitle>
+                  <CardTitle className="text-foreground">{value.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base">
+                  <CardDescription className="text-base text-muted-foreground">
                     {value.description}
                   </CardDescription>
                 </CardContent>
@@ -164,7 +164,7 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-display font-bold mb-4">
+            <h2 className="text-3xl font-display font-bold mb-4 text-foreground">
               What makes Go-Moto different
             </h2>
           </div>
@@ -182,8 +182,8 @@ export default function AboutPage() {
               'WhatsApp-first communication',
             ].map((item, index) => (
               <div key={index} className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0" />
-                <span>{item}</span>
+                <CheckCircle2 className="h-5 w-5 text-teal-400 shrink-0" />
+                <span className="text-foreground/80">{item}</span>
               </div>
             ))}
           </div>
@@ -191,10 +191,10 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-display font-bold mb-4">
+            <h2 className="text-3xl font-display font-bold mb-4 text-foreground">
               Meet the team
             </h2>
             <p className="text-muted-foreground">
@@ -204,15 +204,15 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {TEAM.map((member, index) => (
-              <Card key={index} className="text-center">
+              <Card key={index} className="text-center glass border-border">
                 <CardContent className="pt-6">
-                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl font-bold text-primary">
+                  <div className="w-20 h-20 rounded-full bg-teal-400/20 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl font-bold text-teal-400">
                       {member.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
-                  <h3 className="font-semibold">{member.name}</h3>
-                  <p className="text-sm text-primary mb-2">{member.role}</p>
+                  <h3 className="font-semibold text-foreground">{member.name}</h3>
+                  <p className="text-sm text-teal-400 mb-2">{member.role}</p>
                   <p className="text-sm text-muted-foreground">{member.bio}</p>
                 </CardContent>
               </Card>

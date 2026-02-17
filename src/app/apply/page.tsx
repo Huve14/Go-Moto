@@ -150,7 +150,7 @@ function ApplyFormContent() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30 py-8">
+    <div className="min-h-screen bg-background py-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
         {/* Header */}
         <div className="mb-8">
@@ -161,7 +161,7 @@ function ApplyFormContent() {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Inventory
           </Link>
-          <h1 className="text-3xl font-display font-bold">Apply for a Bike</h1>
+          <h1 className="text-3xl font-display font-bold text-foreground">Apply for a Bike</h1>
           <p className="text-muted-foreground mt-2">
             Complete the application form below. We'll review your application within 24-48 hours.
           </p>
@@ -178,17 +178,17 @@ function ApplyFormContent() {
                 onClick={() => step.id < currentStep && setCurrentStep(step.id)}
                 className={cn(
                   'flex items-center gap-2 text-sm',
-                  step.id === currentStep && 'text-primary font-medium',
-                  step.id < currentStep && 'text-primary cursor-pointer',
+                  step.id === currentStep && 'text-teal-400 font-medium',
+                  step.id < currentStep && 'text-teal-400 cursor-pointer',
                   step.id > currentStep && 'text-muted-foreground'
                 )}
               >
                 <div
                   className={cn(
                     'w-8 h-8 rounded-full flex items-center justify-center border-2',
-                    step.id === currentStep && 'border-primary bg-primary/10',
-                    step.id < currentStep && 'border-primary bg-primary text-white',
-                    step.id > currentStep && 'border-muted'
+                    step.id === currentStep && 'border-teal-400 bg-teal-400/10',
+                    step.id < currentStep && 'border-teal-400 bg-teal-400 text-white',
+                    step.id > currentStep && 'border-border'
                   )}
                 >
                   {step.id < currentStep ? (
@@ -197,7 +197,7 @@ function ApplyFormContent() {
                     <step.icon className="h-4 w-4" />
                   )}
                 </div>
-                <span className="hidden sm:block">{step.title}</span>
+                <span className="hidden sm:block text-foreground/80">{step.title}</span>
               </button>
             ))}
           </div>
@@ -207,20 +207,21 @@ function ApplyFormContent() {
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Step 1: Your Details */}
           {currentStep === 1 && (
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle>Your Details</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-foreground">Your Details</CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Tell us about yourself so we can get in touch.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="full_name">Full Name *</Label>
+                  <Label htmlFor="full_name" className="text-foreground">Full Name *</Label>
                   <Input
                     id="full_name"
                     {...register('full_name')}
                     placeholder="Enter your full name"
+                    className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                   />
                   {errors.full_name && (
                     <p className="text-sm text-destructive">{errors.full_name.message}</p>
@@ -229,24 +230,26 @@ function ApplyFormContent() {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="email" className="text-foreground">Email *</Label>
                     <Input
                       id="email"
                       type="email"
                       {...register('email')}
                       placeholder="your@email.com"
+                      className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                     />
                     {errors.email && (
                       <p className="text-sm text-destructive">{errors.email.message}</p>
                     )}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number *</Label>
+                    <Label htmlFor="phone" className="text-foreground">Phone Number *</Label>
                     <Input
                       id="phone"
                       type="tel"
                       {...register('phone')}
                       placeholder="0XX XXX XXXX"
+                      className="bg-muted border-border text-foreground placeholder:text-muted-foreground"
                     />
                     {errors.phone && (
                       <p className="text-sm text-destructive">{errors.phone.message}</p>
@@ -254,11 +257,11 @@ function ApplyFormContent() {
                   </div>
                 </div>
 
-                <div className="border-t pt-6">
-                  <h3 className="font-medium mb-4">Additional Information (optional)</h3>
+                <div className="border-t border-border pt-6">
+                  <h3 className="font-medium mb-4 text-foreground">Additional Information (optional)</h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="platform">Delivery Platform</Label>
+                      <Label htmlFor="platform" className="text-foreground">Delivery Platform</Label>
                       <Select
                         value={watchedValues.platform}
                         onValueChange={(value) => setValue('platform', value)}
@@ -276,7 +279,7 @@ function ApplyFormContent() {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="income_range">Monthly Income Range</Label>
+                      <Label htmlFor="income_range" className="text-foreground">Monthly Income Range</Label>
                       <Select
                         value={watchedValues.income_range}
                         onValueChange={(value) => setValue('income_range', value)}
@@ -301,16 +304,16 @@ function ApplyFormContent() {
 
           {/* Step 2: Plan Selection */}
           {currentStep === 2 && (
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle>Choose Your Plan</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-foreground">Choose Your Plan</CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Select a rental plan that suits your needs.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
-                  <Label>Rental Plan *</Label>
+                  <Label className="text-foreground">Rental Plan *</Label>
                   <RadioGroup
                     value={watchedValues.plan}
                     onValueChange={(value) => setValue('plan', value as 'starter' | 'pro' | 'fleet')}
@@ -320,18 +323,19 @@ function ApplyFormContent() {
                       <div
                         key={plan.id}
                         className={cn(
-                          'relative flex items-start space-x-3 rounded-lg border p-4 cursor-pointer',
-                          watchedValues.plan === plan.id && 'border-primary ring-1 ring-primary'
+                          'relative flex items-start space-x-3 rounded-lg border p-4 cursor-pointer bg-muted',
+                          watchedValues.plan === plan.id && 'border-teal-400 ring-1 ring-teal-400',
+                          watchedValues.plan !== plan.id && 'border-border'
                         )}
                       >
                         <RadioGroupItem value={plan.id} id={plan.id} className="mt-1" />
                         <Label htmlFor={plan.id} className="flex-1 cursor-pointer">
                           <div className="flex items-center gap-2">
-                            <span className="font-medium">{plan.name}</span>
-                            {plan.popular && <Badge>Popular</Badge>}
+                            <span className="font-medium text-foreground">{plan.name}</span>
+                            {plan.popular && <Badge variant="accent">Popular</Badge>}
                           </div>
                           <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
-                          <p className="text-sm font-medium mt-2">From R{plan.price_weekly}/week</p>
+                          <p className="text-sm font-medium mt-2 text-teal-400">From R{plan.price_weekly}/week</p>
                         </Label>
                       </div>
                     ))}
@@ -342,7 +346,7 @@ function ApplyFormContent() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="location">Preferred Collection Location *</Label>
+                  <Label htmlFor="location" className="text-foreground">Preferred Collection Location *</Label>
                   <Select
                     value={watchedValues.location}
                     onValueChange={(value) => setValue('location', value)}
@@ -368,24 +372,24 @@ function ApplyFormContent() {
 
           {/* Step 3: Review */}
           {currentStep === 3 && (
-            <Card>
+            <Card className="glass border-border">
               <CardHeader>
-                <CardTitle>Review & Submit</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-foreground">Review & Submit</CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Please review your application details before submitting.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Summary */}
-                <div className="bg-muted/50 rounded-lg p-4 space-y-3">
+                <div className="bg-muted border border-border rounded-lg p-4 space-y-3">
                   <div className="grid sm:grid-cols-2 gap-2 text-sm">
-                    <div><span className="text-muted-foreground">Name:</span> {watchedValues.full_name}</div>
-                    <div><span className="text-muted-foreground">Email:</span> {watchedValues.email}</div>
-                    <div><span className="text-muted-foreground">Phone:</span> {watchedValues.phone}</div>
-                    <div><span className="text-muted-foreground">Location:</span> {LOCATIONS.find(l => l.value === watchedValues.location)?.label}</div>
-                    <div><span className="text-muted-foreground">Plan:</span> {PLANS.find(p => p.id === watchedValues.plan)?.name}</div>
+                    <div className="text-foreground"><span className="text-muted-foreground">Name:</span> {watchedValues.full_name}</div>
+                    <div className="text-foreground"><span className="text-muted-foreground">Email:</span> {watchedValues.email}</div>
+                    <div className="text-foreground"><span className="text-muted-foreground">Phone:</span> {watchedValues.phone}</div>
+                    <div className="text-foreground"><span className="text-muted-foreground">Location:</span> {LOCATIONS.find(l => l.value === watchedValues.location)?.label}</div>
+                    <div className="text-foreground"><span className="text-muted-foreground">Plan:</span> {PLANS.find(p => p.id === watchedValues.plan)?.name}</div>
                     {watchedValues.platform && (
-                      <div><span className="text-muted-foreground">Platform:</span> {PLATFORMS.find(p => p.value === watchedValues.platform)?.label}</div>
+                      <div className="text-foreground"><span className="text-muted-foreground">Platform:</span> {PLATFORMS.find(p => p.value === watchedValues.platform)?.label}</div>
                     )}
                   </div>
                 </div>
@@ -398,13 +402,13 @@ function ApplyFormContent() {
                       checked={watchedValues.consent}
                       onCheckedChange={(checked) => setValue('consent', !!checked as unknown as true)}
                     />
-                    <Label htmlFor="consent" className="text-sm cursor-pointer leading-relaxed">
+                    <Label htmlFor="consent" className="text-sm cursor-pointer leading-relaxed text-foreground/80">
                       I agree to the{' '}
-                      <Link href="/terms" className="text-primary underline" target="_blank">
+                      <Link href="/terms" className="text-teal-400 underline" target="_blank">
                         Terms and Conditions
                       </Link>{' '}
                       and{' '}
-                      <Link href="/privacy" className="text-primary underline" target="_blank">
+                      <Link href="/privacy" className="text-teal-400 underline" target="_blank">
                         Privacy Policy
                       </Link>
                       . I confirm that all information provided is accurate. *
@@ -466,9 +470,9 @@ function ApplyFormContent() {
 export default function ApplyPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-muted/30 py-8 flex items-center justify-center">
+      <div className="min-h-screen bg-background py-8 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-400 mx-auto mb-4"></div>
           <p className="text-muted-foreground">Loading application form...</p>
         </div>
       </div>
