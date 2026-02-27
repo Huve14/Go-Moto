@@ -4,7 +4,7 @@
 
 Go-Moto is a full-stack web application built for the South African market, providing bike rental, rent-to-own, and sales services. Designed specifically for gig economy riders, commuters, and businesses.
 
-## 🚀 Tech Stack
+Tech Stack
 
 - **Framework**: Next.js 14+ (App Router)
 - **Language**: TypeScript
@@ -15,33 +15,33 @@ Go-Moto is a full-stack web application built for the South African market, prov
 - **Email**: Resend
 - **Forms**: React Hook Form + Zod
 
-## 📋 Features
+Features
 
 ### Public Features
-- 🏍️ Browse bike inventory with filters
-- 📱 Responsive design (mobile-first)
-- 💰 Earnings calculator for gig riders
-- 📝 Multi-step application form
-- 🔧 Service booking system
-- 💵 Sell/trade your bike
-- 🏢 Fleet solutions for businesses
+- Browse bike inventory with filters
+- Responsive design (mobile-first)
+- Earnings calculator for gig riders
+- Multi-step application form
+- Service booking system
+- Sell/trade your bike
+- Fleet solutions for businesses
 
 ### User Features
-- 🔐 User authentication (email/password)
-- ❤️ Save favorite bikes
-- 📊 Track applications
-- 👤 Profile management
+- User authentication (email/password)
+- Save favorite bikes
+- Track applications
+- Profile management
 
 ### Admin Features
-- 📊 Dashboard with stats
-- 📋 Listing management (CRUD)
-- 📄 Application review & approval
-- 📅 Service booking management
-- 💰 Sell/trade request handling
-- 👥 Lead management
-- ⚙️ Site settings
+- Dashboard with stats
+- Listing management (CRUD)
+- Application review & approval
+- Service booking management
+- Sell/trade request handling
+- Lead management
+- Site settings
 
-## 🛠️ Setup
+## Setup
 
 ### Prerequisites
 
@@ -102,7 +102,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000)
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
@@ -153,7 +153,7 @@ All tables have RLS enabled with appropriate policies for:
 - Authenticated user access (own data)
 - Admin full access
 
-## 🚀 Deployment
+## Deployment
 
 ### Vercel (Recommended)
 
@@ -174,7 +174,7 @@ The app can be deployed to any platform supporting Node.js 18+:
 - DigitalOcean App Platform
 - AWS Amplify
 
-## 📧 Email Templates
+## Email Templates
 
 The app sends emails for:
 - Application confirmation
@@ -185,7 +185,7 @@ The app sends emails for:
 
 Configure your Resend domain for production.
 
-## 🔐 Security
+## Security
 
 - All database access uses Row Level Security
 - Authentication via Supabase Auth (JWT)
@@ -193,14 +193,14 @@ Configure your Resend domain for production.
 - Input validation with Zod
 - File upload size limits (10MB)
 
-## 📱 PWA Support
+## PWA Support
 
 The app includes basic PWA support:
 - Web manifest
 - Service worker ready
 - Mobile-optimized design
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/amazing`)
@@ -208,11 +208,11 @@ The app includes basic PWA support:
 4. Push to branch (`git push origin feature/amazing`)
 5. Open Pull Request
 
-## 📄 License
+## License
 
 MIT License - see LICENSE file
 
-## 🆘 Support
+## Support
 
 - Email: support@gomoto.co.za
 - WhatsApp: +27 82 123 4567
