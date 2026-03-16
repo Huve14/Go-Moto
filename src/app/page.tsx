@@ -20,6 +20,7 @@ import {
   BadgeCheck,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ScrollAnimator } from '@/components/ui/scroll-animator'
 
 /* ─────────────────────────────────────────────
    HERO SECTION
@@ -64,7 +65,7 @@ function HeroSection() {
           <Button
             asChild
             size="lg"
-            className="bg-[#E53935] hover:bg-[#C62828] text-white text-base font-semibold px-8 py-6 rounded-xl glow-red-sm transition-all duration-300 hover:glow-red hover:scale-105"
+            className="bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white text-base font-semibold px-8 py-6 rounded-xl shadow-[0_4px_20px_rgba(229,57,53,0.35)] hover:shadow-[0_6px_28px_rgba(229,57,53,0.5)] transition-all duration-300 hover:scale-105"
           >
             <Link href="/apply">
               Apply Now — It&apos;s Free
@@ -115,6 +116,16 @@ function HeroSection() {
           </div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25 pointer-events-none"
+        aria-hidden="true"
+      >
+        <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+      </div>
     </section>
   )
 }
@@ -132,24 +143,162 @@ function TrustBar() {
     { name: 'Takealot', abbr: 'TKL' },
   ]
 
+  // Duplicate items for seamless infinite marquee loop
+  const platformsForMarquee = [...platforms, ...platforms]
+
   return (
-    <section className="bg-[#0a0b14] border-y border-white/6 py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs font-semibold tracking-widest uppercase text-white/30 mb-8">
-          Trusted by riders delivering for South Africa&apos;s top platforms
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
-          {platforms.map((p) => (
+    <section className="bg-[#0a0b14] border-y border-white/6 py-10 overflow-hidden">
+      <p className="text-center text-xs font-semibold tracking-widest uppercase text-white/30 mb-8">
+        Trusted by riders delivering for South Africa&apos;s top platforms
+      </p>
+      <div className="relative w-full overflow-hidden">
+        <div className="marquee-track">
+          {platformsForMarquee.map((p, i) => (
             <div
-              key={p.name}
-              className="flex items-center gap-2 text-white/40 hover:text-white/70 transition-colors duration-300"
+              key={`${p.name}-${i}`}
+              className="flex items-center gap-2.5 text-white/35 flex-shrink-0 px-8 hover:text-white/65 transition-colors duration-300"
             >
-              <div className="w-8 h-8 rounded-lg bg-white/6 flex items-center justify-center text-xs font-bold">
+              <div className="w-9 h-9 rounded-xl bg-white/6 flex items-center justify-center text-xs font-bold border border-white/8">
                 {p.abbr}
               </div>
-              <span className="text-sm font-medium hidden sm:block">{p.name}</span>
+              <span className="text-sm font-medium whitespace-nowrap">{p.name}</span>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   FEATURED BIKES — Autovent-style vehicle grid
+───────────────────────────────────────────── */
+function FeaturedBikes() {
+  const bikes = [
+    {
+      name: 'Honda PCX 150',
+      category: 'Scooter',
+      specs: ['150cc Engine', 'Fuel Efficient', 'ABS Brakes'],
+      priceFrom: 'R499',
+      badge: 'Most Popular',
+      iconBg: 'bg-red-500/15',
+      iconColor: 'text-red-400',
+    },
+    {
+      name: 'Yamaha NMAX 155',
+      category: 'Scooter',
+      specs: ['155cc Engine', 'Keyless Ignition', 'Traction Control'],
+      priceFrom: 'R549',
+      badge: 'Best Seller',
+      iconBg: 'bg-blue-500/15',
+      iconColor: 'text-blue-400',
+    },
+    {
+      name: 'Suzuki Address 110',
+      category: 'Urban Scooter',
+      specs: ['110cc Engine', 'Lightweight', 'Under-seat Storage'],
+      priceFrom: 'R429',
+      badge: 'Budget Pick',
+      iconBg: 'bg-emerald-500/15',
+      iconColor: 'text-emerald-400',
+    },
+    {
+      name: 'Lifan KPR 165R',
+      category: 'Sport Bike',
+      specs: ['165cc Engine', 'LED Headlamps', 'Disc Brakes'],
+      priceFrom: 'R649',
+      badge: 'Premium',
+      iconBg: 'bg-purple-500/15',
+      iconColor: 'text-purple-400',
+    },
+  ]
+
+  return (
+    <section className="bg-[#07080f] py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16" data-animate="fade-up">
+          <span className="section-label">Featured Motorcycles</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-8 mb-4 tracking-tight">
+            Built for{' '}
+            <span className="gradient-text-hero">South African Roads</span>
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">
+            Every bike is pre-inspected, fully serviced, and ready to earn from day one.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {bikes.map((bike, i) => (
+            <div
+              key={bike.name}
+              className="relative hero-glass-card vehicle-card overflow-hidden group cursor-pointer flex flex-col"
+              data-animate="fade-up"
+              data-delay={String((i + 1) * 100)}
+            >
+              <div className="card-accent-line" />
+              <div className="p-6 flex flex-col flex-1">
+                {/* Labels */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-white/35 bg-white/5 px-2.5 py-1 rounded-full">
+                    {bike.category}
+                  </span>
+                  <span className="text-[10px] font-bold text-[#E53935] bg-[#E53935]/10 px-2.5 py-1 rounded-full">
+                    {bike.badge}
+                  </span>
+                </div>
+
+                {/* Icon */}
+                <div className={`w-14 h-14 rounded-2xl ${bike.iconBg} flex items-center justify-center mb-4`}>
+                  <Bike className={`h-7 w-7 ${bike.iconColor}`} />
+                </div>
+
+                {/* Name */}
+                <h3 className="font-display text-xl font-bold text-white mb-3">{bike.name}</h3>
+
+                {/* Specs */}
+                <ul className="space-y-1.5 mb-5 flex-1">
+                  {bike.specs.map((spec) => (
+                    <li key={spec} className="flex items-center gap-2 text-xs text-white/50">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#E53935]/50 flex-shrink-0" />
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Price + CTA */}
+                <div className="flex items-center justify-between pt-4 border-t border-white/8">
+                  <div>
+                    <p className="text-[10px] text-white/35 uppercase tracking-wider mb-0.5">From</p>
+                    <p className="font-display text-xl font-bold text-white">
+                      {bike.priceFrom}
+                      <span className="text-sm font-normal text-white/40">/wk</span>
+                    </p>
+                  </div>
+                  <Link
+                    href="/inventory"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E53935] hover:text-red-400 transition-colors group-hover:gap-2.5 duration-200"
+                  >
+                    View
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            size="lg"
+            className="bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white font-semibold px-8 py-6 rounded-xl shadow-[0_4px_20px_rgba(229,57,53,0.35)] hover:shadow-[0_6px_28px_rgba(229,57,53,0.5)] transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <Link href="/inventory">
+              Browse Full Inventory
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
@@ -216,7 +365,7 @@ function CoreSolutions() {
       <div className="absolute inset-0 bg-dots opacity-40 pointer-events-none" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-animate="fade-up">
           <span className="badge-pill mb-6 inline-flex">Core Solutions</span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
             Everything you need to{' '}
@@ -385,7 +534,7 @@ function PlatformFeatures() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] hero-orb blur-3xl opacity-50 pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-animate="fade-up">
           <span className="badge-pill mb-6 inline-flex">Platform Benefits</span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
             Built for riders who{' '}
@@ -454,7 +603,7 @@ function PricingTeaser() {
     <section className="bg-[#0a0b14] py-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-animate="fade-up">
           <span className="badge-pill mb-6 inline-flex">Pricing</span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
             Simple, transparent{' '}
@@ -565,7 +714,7 @@ function ServiceSupport() {
     <section className="bg-[#07080f] py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-animate="fade-up">
           <span className="badge-pill mb-6 inline-flex">Support</span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
             We&apos;re here when{' '}
@@ -627,7 +776,7 @@ function Testimonials() {
     <section className="bg-[#0a0b14] py-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" data-animate="fade-up">
           <span className="badge-pill mb-6 inline-flex">Testimonials</span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
             Trusted by riders{' '}
@@ -733,6 +882,51 @@ function PlatformShowcase() {
 }
 
 /* ─────────────────────────────────────────────
+   NEWSLETTER — Autovent-style email capture
+───────────────────────────────────────────── */
+function NewsletterSection() {
+  return (
+    <section className="bg-[#07080f] py-20 relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/25 to-transparent" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 hero-orb blur-3xl opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#E53935]/5 via-transparent to-transparent pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-2xl mx-auto text-center" data-animate="fade-up">
+          <span className="section-label">Stay in the Loop</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-8 mb-4 tracking-tight">
+            Exclusive deals,{' '}
+            <span className="gradient-text-hero">first</span>
+          </h2>
+          <p className="text-white/50 text-lg mb-10">
+            New bikes, pricing updates and rider tips delivered straight to your inbox.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="newsletter-email"
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 bg-white/6 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-[#E53935]/50 transition-colors text-sm"
+            />
+            <button
+              type="button"
+              aria-label="Subscribe to the Go-Moto newsletter"
+              className="btn-gradient px-6 py-3.5 rounded-xl font-semibold whitespace-nowrap text-sm"
+            >
+              Subscribe
+            </button>
+          </div>
+          <p className="text-white/25 text-xs mt-4">No spam. Unsubscribe anytime. POPIA compliant.</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
    FINAL CTA
 ───────────────────────────────────────────── */
 function FinalCTA() {
@@ -754,7 +948,7 @@ function FinalCTA() {
             <Button
               asChild
               size="lg"
-              className="bg-[#E53935] hover:bg-[#C62828] text-white font-bold text-lg px-10 py-7 rounded-xl glow-red-sm hover:glow-red transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white font-bold text-lg px-10 py-7 rounded-xl shadow-[0_4px_20px_rgba(229,57,53,0.35)] hover:shadow-[0_6px_28px_rgba(229,57,53,0.5)] transition-all duration-300 hover:scale-105"
             >
               <Link href="/apply">
                 Apply Now — Free &amp; Fast
@@ -792,8 +986,10 @@ function FinalCTA() {
 export default function HomePage() {
   return (
     <>
+      <ScrollAnimator />
       <HeroSection />
       <TrustBar />
+      <FeaturedBikes />
       <CoreSolutions />
       <HowItWorks />
       <PlatformFeatures />
@@ -801,6 +997,7 @@ export default function HomePage() {
       <ServiceSupport />
       <PlatformShowcase />
       <Testimonials />
+      <NewsletterSection />
       <FinalCTA />
     </>
   )

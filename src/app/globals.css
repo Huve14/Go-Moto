@@ -515,3 +515,80 @@ html {
   -webkit-backface-visibility: hidden;
 }
 
+/* ── Autovent-Inspired Design System ──────────────────────── */
+:root {
+  --gradient-primary: linear-gradient(135deg, #E53935 0%, #FF5722 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #C62828 0%, #E64A19 100%);
+  --dark-bg: #07080f;
+  --dark-bg-2: #0a0b14;
+  --dark-surface: rgba(255, 255, 255, 0.04);
+  --dark-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Gradient CTA button (Autovent-style) */
+.btn-gradient {
+  background: linear-gradient(135deg, #E53935 0%, #FF5722 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(229, 57, 53, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #C62828 0%, #E64A19 100%);
+  box-shadow: 0 6px 28px rgba(229, 57, 53, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Section label with decorative lines (Autovent-style) */
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E53935;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::before,
+.section-label::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: #E53935;
+  opacity: 0.45;
+}
+
+/* Vehicle card hover lift (Autovent-style) */
+.vehicle-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(229, 57, 53, 0.2);
+}
+
+/* Marquee / ticker animation (Autovent trust bar) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+

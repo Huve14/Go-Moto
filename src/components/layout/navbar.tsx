@@ -133,7 +133,7 @@ function MobileMenu({
                   Sign In
                 </Link>
               )}
-              <Button asChild className="w-full bg-[#E53935] hover:bg-[#C62828] text-white font-semibold rounded-xl py-6">
+              <Button asChild className="w-full bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white font-semibold rounded-xl py-6 shadow-[0_4px_20px_rgba(229,57,53,0.3)] transition-all duration-300">
                 <Link href="/apply" onClick={onClose}>
                   Apply Now
                 </Link>
@@ -304,7 +304,7 @@ export function Navbar() {
                   <Link href="/login">Sign In</Link>
                 </Button>
               )}
-              <Button asChild className="bg-[#E53935] hover:bg-[#C62828] text-white font-semibold rounded-lg shadow-[0_0_12px_rgba(229,57,53,0.3)] hover:shadow-[0_0_20px_rgba(229,57,53,0.4)] transition-all duration-300">
+              <Button asChild className="bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white font-semibold rounded-lg shadow-[0_0_12px_rgba(229,57,53,0.3)] hover:shadow-[0_0_20px_rgba(229,57,53,0.5)] transition-all duration-300 hover:-translate-y-0.5">
                 <Link href="/apply">Apply Now</Link>
               </Button>
             </div>
