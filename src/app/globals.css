@@ -94,6 +94,14 @@
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
   }
+
+  .gradient-text-hero {
+    color: #E53935; /* fallback for browsers without background-clip: text support */
+    background: linear-gradient(135deg, #ffffff 0%, #E53935 60%, #ff6b6b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   
   .gradient-bg {
     @apply bg-gradient-to-br from-primary via-primary/90 to-primary/80;
@@ -108,21 +116,73 @@
     @apply bg-white/[0.03] backdrop-blur-lg border border-white/[0.08];
   }
   
-  /* Light mode glass card */
+  /* Glassmorphism card - premium dark */
   .glass-card {
     @apply bg-white/90 backdrop-blur-md border border-gray-200/50 shadow-sm;
   }
   
   .dark .glass-card {
-    @apply bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-none;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.08);
   }
-  
+
+  /* Hero glassmorphism card used in dark sections */
+  .hero-glass-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+  }
+
+  /* Red glow utility */
+  .glow-red {
+    box-shadow: 0 0 40px rgba(229, 57, 53, 0.25), 0 0 80px rgba(229, 57, 53, 0.1);
+  }
+
+  .glow-red-sm {
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.2);
+  }
+
+  /* Subtle grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Dot grid */
+  .bg-dots {
+    background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  /* Radial gradient orb */
+  .hero-orb {
+    background: radial-gradient(ellipse at center, rgba(229,57,53,0.25) 0%, transparent 70%);
+  }
+
+  .hero-orb-blue {
+    background: radial-gradient(ellipse at center, rgba(59,130,246,0.12) 0%, transparent 70%);
+  }
+
   .card-hover {
     @apply transition-all duration-300 hover:border-primary/30 hover:-translate-y-1 hover:shadow-lg;
   }
   
   .dark .card-hover {
     @apply hover:shadow-none;
+  }
+
+  /* Stat number gradient */
+  .stat-gradient {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   /* Premium surfaces for both modes */
@@ -131,7 +191,7 @@
   }
   
   .dark .premium-surface {
-    @apply bg-[#111827];
+    @apply bg-[#0a0e1a];
   }
   
   .premium-surface-2 {
@@ -139,8 +199,86 @@
   }
   
   .dark .premium-surface-2 {
-    @apply bg-[#0F172A];
+    @apply bg-[#080c18];
   }
+
+  /* Neon border on hover */
+  .neon-border-hover {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .neon-border-hover:hover {
+    border-color: rgba(229,57,53,0.5);
+    box-shadow: 0 0 0 1px rgba(229,57,53,0.2), 0 4px 24px rgba(229,57,53,0.1);
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    background: linear-gradient(135deg, rgba(229,57,53,0.4), rgba(255,255,255,0.1), rgba(229,57,53,0.2));
+    padding: 1px;
+    border-radius: 16px;
+  }
+}
+
+/* Hero section dark background */
+.hero-dark-bg {
+  background: #07080f;
+}
+
+/* Shimmer text animation */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #ffffff 0%, #E53935 30%, #ffffff 60%, #E53935 90%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Pulse glow animation */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Badge pill */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(229,57,53,0.12);
+  border: 1px solid rgba(229,57,53,0.25);
+  color: #E53935;
+}
+
+/* Ticket/card line accent */
+.card-accent-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(229,57,53,0.6), transparent);
+}
+
+/* Number counter */
+.counter-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
 }
 
 /* Date input calendar icon positioning */
@@ -375,5 +513,82 @@ html {
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* ── Autovent-Inspired Design System ──────────────────────── */
+:root {
+  --gradient-primary: linear-gradient(135deg, #E53935 0%, #FF5722 100%);
+  --gradient-primary-hover: linear-gradient(135deg, #C62828 0%, #E64A19 100%);
+  --dark-bg: #07080f;
+  --dark-bg-2: #0a0b14;
+  --dark-surface: rgba(255, 255, 255, 0.04);
+  --dark-border: rgba(255, 255, 255, 0.08);
+}
+
+/* Gradient CTA button (Autovent-style) */
+.btn-gradient {
+  background: linear-gradient(135deg, #E53935 0%, #FF5722 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(229, 57, 53, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #C62828 0%, #E64A19 100%);
+  box-shadow: 0 6px 28px rgba(229, 57, 53, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Section label with decorative lines (Autovent-style) */
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E53935;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::before,
+.section-label::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: #E53935;
+  opacity: 0.45;
+}
+
+/* Vehicle card hover lift (Autovent-style) */
+.vehicle-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(229, 57, 53, 0.2);
+}
+
+/* Marquee / ticker animation (Autovent trust bar) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
 }
 

@@ -1,482 +1,1004 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowRight, CheckCircle2, Bike, FileCheck, Key, Shield, Clock, Wrench, Star, MessageCircle } from 'lucide-react'
+import {
+  ArrowRight,
+  Bike,
+  TrendingUp,
+  Shield,
+  Wrench,
+  Star,
+  CheckCircle2,
+  Zap,
+  Users,
+  MapPin,
+  Clock,
+  ChevronRight,
+  Play,
+  MessageCircle,
+  Package,
+  HeadphonesIcon,
+  BarChart3,
+  BadgeCheck,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { ListingCard } from '@/components/listings/listing-card'
-import { createClient } from '@/lib/supabase/server'
-import { formatCurrency, getWhatsAppUrl } from '@/lib/utils'
-import { PLANS } from '@/types/constants'
+import { ScrollAnimator } from '@/components/ui/scroll-animator'
 
-async function getFeaturedListings() {
-  const supabase = createClient()
-  const { data } = await supabase
-    .from('listings')
-    .select('*, listing_images(*)')
-    .eq('status', 'published')
-    .eq('featured', true)
-    .order('created_at', { ascending: false })
-    .limit(4)
-  return (data || []) as any[]
-}
-
-async function getCmsContent(key: string) {
-  const supabase = createClient()
-  const { data } = await supabase
-    .from('cms_content')
-    .select('data')
-    .eq('key', key)
-    .single()
-  const content = data as any
-  return (content?.data || null) as any
-}
-
-export default async function HomePage() {
-  const [featuredListings, testimonials, faqs] = await Promise.all([
-    getFeaturedListings(),
-    getCmsContent('testimonials'),
-    getCmsContent('faqs'),
-  ])
-
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '27123456789'
-
+/* ─────────────────────────────────────────────
+   HERO SECTION
+───────────────────────────────────────────── */
+function HeroSection() {
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-white">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/50 to-primary" />
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-black/10 rounded-full blur-3xl" />
-        
-        <div className="container relative mx-auto px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <Badge data-animate="fade-up" variant="outline" className="bg-white/20 text-white border-white/30 px-4 py-1.5">
-                🚀 Now serving Johannesburg, Cape Town & Durban
-              </Badge>
-              
-              <h1 data-animate="fade-up" className="text-4xl font-display font-bold tracking-tight sm:text-5xl lg:text-6xl stagger-1">
-                Ride more.{' '}
-                <span className="text-black">Earn more.</span>{' '}
-                Stay on the road.
-              </h1>
-              
-              <p data-animate="fade-up" className="text-lg text-white max-w-xl stagger-2">
-                The operating system for bike ownership & earning. Rent, buy, or rent-to-own 
-                bikes and scooters for delivery, commuting, or fleet operations.
-              </p>
-              
-              <div data-animate="fade-up" className="flex flex-col sm:flex-row gap-4 stagger-3">
-                <Button size="xl" asChild className="bg-white text-primary hover:bg-black hover:text-white">
-                  <Link href="/inventory">
-                    Get a Bike
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button size="xl" variant="outline" asChild className="bg-white text-primary border-white hover:bg-white/90">
-                  <Link href="/apply">
-                    Apply Now
-                  </Link>
-                </Button>
-              </div>
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#07080f]">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-grid opacity-100" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] hero-orb blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[400px] hero-orb-blue blur-3xl pointer-events-none" />
 
-              {/* Trust Signals */}
-              <div className="flex flex-wrap gap-6 pt-4">
-                <div className="flex items-center gap-2 text-sm text-white">
-                  <CheckCircle2 className="h-5 w-5 text-white" />
-                  <span>No credit check required</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-white">
-                  <CheckCircle2 className="h-5 w-5 text-white" />
-                  <span>Maintenance included</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-white">
-                  <CheckCircle2 className="h-5 w-5 text-white" />
-                  <span>Flexible weekly payments</span>
-                </div>
-              </div>
-            </div>
+      {/* Red accent lines */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
 
-            {/* Hero Image/Stats */}
-            <div className="relative hidden lg:block" data-animate="fade-left">
-              <div className="absolute -top-10 -right-10 w-72 h-72 bg-white/20 rounded-full blur-3xl" />
-              <div className="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-white">500+</p>
-                    <p className="text-sm text-white/90 mt-1">Active Riders</p>
-                  </div>
-                  <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-white">98%</p>
-                    <p className="text-sm text-white/90 mt-1">On-Time Support</p>
-                  </div>
-                  <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-white">R450</p>
-                    <p className="text-sm text-white/90 mt-1">From /week</p>
-                  </div>
-                  <div className="text-center p-4">
-                    <p className="text-4xl font-bold text-white">24hr</p>
-                    <p className="text-sm text-white/90 mt-1">Approval Time</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
+        {/* Badge */}
+        <div className="flex justify-center mb-8">
+          <span className="badge-pill">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E53935] pulse-glow inline-block" aria-hidden="true" />
+            <span className="sr-only">Live: </span>
+            South Africa&apos;s #1 Bike Platform
+          </span>
         </div>
-      </section>
 
-      {/* How It Works */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-display font-bold mb-4">
-              Get on the road in 3 easy steps
-            </h2>
-            <p className="text-muted-foreground">
-              We've made getting a bike as simple as possible so you can start earning faster.
-            </p>
-          </div>
+        {/* Headline */}
+        <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.05] tracking-tight max-w-5xl mx-auto mb-6">
+          Ride More.{' '}
+          <span className="gradient-text-hero">Earn More.</span>
+          <br />
+          Stay on the Road.
+        </h1>
 
-          <div className="grid md:grid-cols-3 gap-8">
+        <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
+          The operating system for bike ownership and earning in South Africa. 
+          Rent, rent-to-own, or buy bikes and scooters built for delivery, 
+          commuting, and fleet operations.
+        </p>
+
+        {/* CTA buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <Button
+            asChild
+            size="lg"
+            className="bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white text-base font-semibold px-8 py-6 rounded-xl shadow-[0_4px_20px_rgba(229,57,53,0.35)] hover:shadow-[0_6px_28px_rgba(229,57,53,0.5)] transition-all duration-300 hover:scale-105"
+          >
+            <Link href="/apply">
+              Apply Now — It&apos;s Free
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/20 text-white bg-white/5 hover:bg-white/10 hover:border-white/40 text-base font-semibold px-8 py-6 rounded-xl transition-all duration-300 backdrop-blur-sm"
+          >
+            <Link href="/inventory">
+              Browse Bikes
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+
+        {/* Trust indicators */}
+        <div className="flex flex-wrap items-center justify-center gap-6 text-white/40 text-sm">
+          {['No deposit required', 'Same-day approval', 'Nationwide coverage', 'Fleet management'].map((item) => (
+            <span key={item} className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-[#E53935]" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Stats bar */}
+      <div className="relative z-10 w-full border-t border-white/8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              {
-                icon: FileCheck,
-                step: '01',
-                title: 'Apply Online',
-                description: 'Fill out our simple application form. No credit check required, just basic documentation.',
-              },
-              {
-                icon: CheckCircle2,
-                step: '02',
-                title: 'Get Approved',
-                description: 'Our team reviews your application within 24-48 hours and gets you approved.',
-              },
-              {
-                icon: Key,
-                step: '03',
-                title: 'Collect & Earn',
-                description: 'Pick up your bike, complete a quick orientation, and start earning on the road.',
-              },
-            ].map((item, index) => (
-              <Card key={index} data-animate="scale" className={`relative overflow-hidden card-hover stagger-${index + 1}`}>
-                <CardHeader>
-                  <div className="absolute top-4 right-4 text-6xl font-bold text-muted/20">
-                    {item.step}
-                  </div>
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                    <item.icon className="h-7 w-7 text-primary" />
-                  </div>
-                  <CardTitle>{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    {item.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+              { value: '2,500+', label: 'Bikes on the Road', suffix: '' },
+              { value: '98%', label: 'Rider Satisfaction', suffix: '' },
+              { value: '4', label: 'Major Cities', suffix: '' },
+              { value: 'R12M+', label: 'Earned by Riders', suffix: '' },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <p className="font-display text-3xl sm:text-4xl font-bold text-white counter-value mb-1">
+                  {stat.value}
+                </p>
+                <p className="text-sm text-white/50">{stat.label}</p>
+              </div>
             ))}
           </div>
+        </div>
+      </div>
 
-          <div className="text-center mt-12">
-            <Button size="lg" asChild>
+      {/* Scroll indicator */}
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25 pointer-events-none"
+        aria-hidden="true"
+      >
+        <span className="text-[10px] font-medium tracking-[0.2em] uppercase">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   PLATFORM LOGOS / TRUST BAR
+───────────────────────────────────────────── */
+function TrustBar() {
+  const platforms = [
+    { name: 'Uber Eats', abbr: 'UE' },
+    { name: 'Mr D Food', abbr: 'MRD' },
+    { name: 'Bolt Food', abbr: 'BF' },
+    { name: 'Checkers Sixty60', abbr: 'S60' },
+    { name: 'Pargo', abbr: 'PGO' },
+    { name: 'Takealot', abbr: 'TKL' },
+  ]
+
+  // Duplicate items for seamless infinite marquee loop
+  const platformsForMarquee = [...platforms, ...platforms]
+
+  return (
+    <section className="bg-[#0a0b14] border-y border-white/6 py-10 overflow-hidden">
+      <p className="text-center text-xs font-semibold tracking-widest uppercase text-white/30 mb-8">
+        Trusted by riders delivering for South Africa&apos;s top platforms
+      </p>
+      <div className="relative w-full overflow-hidden">
+        <div className="marquee-track">
+          {platformsForMarquee.map((p, i) => (
+            <div
+              key={`${p.name}-${i}`}
+              className="flex items-center gap-2.5 text-white/35 flex-shrink-0 px-8 hover:text-white/65 transition-colors duration-300"
+            >
+              <div className="w-9 h-9 rounded-xl bg-white/6 flex items-center justify-center text-xs font-bold border border-white/8">
+                {p.abbr}
+              </div>
+              <span className="text-sm font-medium whitespace-nowrap">{p.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   FEATURED BIKES — Autovent-style vehicle grid
+───────────────────────────────────────────── */
+function FeaturedBikes() {
+  const bikes = [
+    {
+      name: 'Honda PCX 150',
+      category: 'Scooter',
+      specs: ['150cc Engine', 'Fuel Efficient', 'ABS Brakes'],
+      priceFrom: 'R499',
+      badge: 'Most Popular',
+      iconBg: 'bg-red-500/15',
+      iconColor: 'text-red-400',
+    },
+    {
+      name: 'Yamaha NMAX 155',
+      category: 'Scooter',
+      specs: ['155cc Engine', 'Keyless Ignition', 'Traction Control'],
+      priceFrom: 'R549',
+      badge: 'Best Seller',
+      iconBg: 'bg-blue-500/15',
+      iconColor: 'text-blue-400',
+    },
+    {
+      name: 'Suzuki Address 110',
+      category: 'Urban Scooter',
+      specs: ['110cc Engine', 'Lightweight', 'Under-seat Storage'],
+      priceFrom: 'R429',
+      badge: 'Budget Pick',
+      iconBg: 'bg-emerald-500/15',
+      iconColor: 'text-emerald-400',
+    },
+    {
+      name: 'Lifan KPR 165R',
+      category: 'Sport Bike',
+      specs: ['165cc Engine', 'LED Headlamps', 'Disc Brakes'],
+      priceFrom: 'R649',
+      badge: 'Premium',
+      iconBg: 'bg-purple-500/15',
+      iconColor: 'text-purple-400',
+    },
+  ]
+
+  return (
+    <section className="bg-[#07080f] py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16" data-animate="fade-up">
+          <span className="section-label">Featured Motorcycles</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-8 mb-4 tracking-tight">
+            Built for{' '}
+            <span className="gradient-text-hero">South African Roads</span>
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">
+            Every bike is pre-inspected, fully serviced, and ready to earn from day one.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {bikes.map((bike, i) => (
+            <div
+              key={bike.name}
+              className="relative hero-glass-card vehicle-card overflow-hidden group cursor-pointer flex flex-col"
+              data-animate="fade-up"
+              data-delay={String((i + 1) * 100)}
+            >
+              <div className="card-accent-line" />
+              <div className="p-6 flex flex-col flex-1">
+                {/* Labels */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-white/35 bg-white/5 px-2.5 py-1 rounded-full">
+                    {bike.category}
+                  </span>
+                  <span className="text-[10px] font-bold text-[#E53935] bg-[#E53935]/10 px-2.5 py-1 rounded-full">
+                    {bike.badge}
+                  </span>
+                </div>
+
+                {/* Icon */}
+                <div className={`w-14 h-14 rounded-2xl ${bike.iconBg} flex items-center justify-center mb-4`}>
+                  <Bike className={`h-7 w-7 ${bike.iconColor}`} />
+                </div>
+
+                {/* Name */}
+                <h3 className="font-display text-xl font-bold text-white mb-3">{bike.name}</h3>
+
+                {/* Specs */}
+                <ul className="space-y-1.5 mb-5 flex-1">
+                  {bike.specs.map((spec) => (
+                    <li key={spec} className="flex items-center gap-2 text-xs text-white/50">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#E53935]/50 flex-shrink-0" />
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Price + CTA */}
+                <div className="flex items-center justify-between pt-4 border-t border-white/8">
+                  <div>
+                    <p className="text-[10px] text-white/35 uppercase tracking-wider mb-0.5">From</p>
+                    <p className="font-display text-xl font-bold text-white">
+                      {bike.priceFrom}
+                      <span className="text-sm font-normal text-white/40">/wk</span>
+                    </p>
+                  </div>
+                  <Link
+                    href="/inventory"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E53935] hover:text-red-400 transition-colors group-hover:gap-2.5 duration-200"
+                  >
+                    View
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            size="lg"
+            className="bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white font-semibold px-8 py-6 rounded-xl shadow-[0_4px_20px_rgba(229,57,53,0.35)] hover:shadow-[0_6px_28px_rgba(229,57,53,0.5)] transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <Link href="/inventory">
+              Browse Full Inventory
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   CORE SOLUTIONS
+───────────────────────────────────────────── */
+function CoreSolutions() {
+  const solutions = [
+    {
+      icon: Bike,
+      title: 'Rent-to-Own',
+      tagline: 'Own it. Keep it.',
+      description:
+        'Start riding today with zero deposit. Weekly payments that build toward ownership — your bike, your asset.',
+      cta: 'Apply Now',
+      href: '/apply',
+      accent: 'from-red-500/20 to-red-500/5',
+      iconBg: 'bg-red-500/15',
+      iconColor: 'text-red-400',
+    },
+    {
+      icon: TrendingUp,
+      title: 'Delivery Fleet',
+      tagline: 'Scale your operations.',
+      description:
+        'Fully managed fleets for logistics companies. Real-time tracking, maintenance included, flexible pricing per rider.',
+      cta: 'View Fleet Plans',
+      href: '/fleet',
+      accent: 'from-blue-500/20 to-blue-500/5',
+      iconBg: 'bg-blue-500/15',
+      iconColor: 'text-blue-400',
+    },
+    {
+      icon: Package,
+      title: 'Buy Outright',
+      tagline: 'Browse. Choose. Ride.',
+      description:
+        'Purchase verified, serviced bikes from our curated inventory. Finance options available. No surprise fees.',
+      cta: 'Browse Inventory',
+      href: '/inventory',
+      accent: 'from-emerald-500/20 to-emerald-500/5',
+      iconBg: 'bg-emerald-500/15',
+      iconColor: 'text-emerald-400',
+    },
+    {
+      icon: BarChart3,
+      title: 'Sell Your Bike',
+      tagline: 'List. Earn. Repeat.',
+      description:
+        'Turn your idle bike into income. List on Go-Moto, reach thousands of verified buyers and renters instantly.',
+      cta: 'List Your Bike',
+      href: '/list-your-bike',
+      accent: 'from-purple-500/20 to-purple-500/5',
+      iconBg: 'bg-purple-500/15',
+      iconColor: 'text-purple-400',
+    },
+  ]
+
+  return (
+    <section className="bg-[#07080f] py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-dots opacity-40 pointer-events-none" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section header */}
+        <div className="text-center mb-16" data-animate="fade-up">
+          <span className="badge-pill mb-6 inline-flex">Core Solutions</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
+            Everything you need to{' '}
+            <span className="gradient-text-hero">get on the road</span>
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">
+            Whether you&apos;re a gig worker, fleet operator, or private buyer — Go-Moto has a solution built for you.
+          </p>
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {solutions.map((s) => (
+            <div
+              key={s.title}
+              className="relative hero-glass-card p-6 group neon-border-hover cursor-pointer flex flex-col"
+            >
+              <div className="card-accent-line" />
+              {/* Icon */}
+              <div className={`w-12 h-12 rounded-xl ${s.iconBg} flex items-center justify-center mb-5`}>
+                <s.icon className={`h-6 w-6 ${s.iconColor}`} />
+              </div>
+              {/* Content */}
+              <p className="text-xs font-semibold tracking-widest uppercase text-white/40 mb-1">{s.tagline}</p>
+              <h3 className="font-display text-xl font-bold text-white mb-3">{s.title}</h3>
+              <p className="text-sm text-white/55 leading-relaxed flex-1 mb-6">{s.description}</p>
+              {/* CTA */}
+              <Link
+                href={s.href}
+                className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white transition-colors group-hover:gap-3 duration-200"
+              >
+                {s.cta}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   HOW IT WORKS / FEATURE HIGHLIGHT
+───────────────────────────────────────────── */
+function HowItWorks() {
+  const steps = [
+    {
+      number: '01',
+      title: 'Choose your plan',
+      description:
+        'Pick rent-to-own, outright purchase, or fleet solutions. Transparent pricing — no hidden fees.',
+    },
+    {
+      number: '02',
+      title: 'Apply in minutes',
+      description:
+        'Complete a quick online application. Our team reviews same-day and contacts you within hours.',
+    },
+    {
+      number: '03',
+      title: 'Get your bike',
+      description:
+        'Pick up your verified, serviced bike or we deliver to you. All maintenance is included.',
+    },
+    {
+      number: '04',
+      title: 'Ride & earn',
+      description:
+        'Start earning immediately on Uber Eats, Mr D, Bolt Food, or any platform you choose.',
+    },
+  ]
+
+  return (
+    <section className="bg-[#0a0b14] py-24 relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left: content */}
+          <div>
+            <span className="badge-pill mb-6 inline-flex">How it Works</span>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+              From application to{' '}
+              <span className="gradient-text-hero">first delivery</span>
+              <br />
+              in 24 hours.
+            </h2>
+            <p className="text-white/55 text-lg mb-10 leading-relaxed">
+              Go-Moto removes every barrier between you and earning. No credit checks, no long queues, no paperwork delays.
+            </p>
+            <Button asChild className="bg-[#E53935] hover:bg-[#C62828] text-white font-semibold px-8 py-6 rounded-xl">
               <Link href="/apply">
                 Start Your Application
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
-        </div>
-      </section>
 
-      {/* Featured Listings */}
-      {featuredListings.length > 0 && (
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div data-animate="fade-up" className="flex items-center justify-between mb-12">
-              <div>
-                <h2 className="text-3xl font-display font-bold mb-2">
-                  Featured Bikes
-                </h2>
-                <p className="text-muted-foreground">
-                  Hand-picked selection of our best bikes for delivery riders
-                </p>
-              </div>
-              <Button variant="outline" asChild className="hidden sm:flex">
-                <Link href="/inventory">
-                  View All Inventory
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {featuredListings.map((listing, index) => (
-                <div key={listing.id} data-animate="fade-up" className={`stagger-${(index % 4) + 1}`}>
-                  <ListingCard
-                    listing={listing}
-                    showFavorite={false}
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mt-8 sm:hidden">
-              <Button variant="outline" asChild>
-                <Link href="/inventory">
-                  View All Inventory
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Plans Preview */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-display font-bold mb-4">
-              Choose your plan
-            </h2>
-            <p className="text-muted-foreground">
-              Flexible options designed for gig riders, commuters, and businesses.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {PLANS.map((plan, index) => (
-              <Card
-                key={plan.id}
-                data-animate="scale"
-                className={`relative card-hover stagger-${index + 1} ${
-                  plan.popular ? 'ring-2 ring-primary/50 border-primary/30' : ''
-                }`}
+          {/* Right: steps */}
+          <div className="space-y-4">
+            {steps.map((step, i) => (
+              <div
+                key={step.number}
+                className="relative flex gap-5 p-5 hero-glass-card group hover:border-white/15 transition-all duration-300"
               >
-                {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    Most Popular
-                  </Badge>
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#E53935]/15 flex items-center justify-center">
+                  <span className="text-sm font-bold text-[#E53935]">{step.number}</span>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white mb-1">{step.title}</h3>
+                  <p className="text-sm text-white/50 leading-relaxed">{step.description}</p>
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="absolute -bottom-2.5 left-[28px] w-px h-5 bg-white/10" />
                 )}
-                <CardHeader className="text-center">
-                  <CardTitle>{plan.name}</CardTitle>
-                  <CardDescription>
-                    {plan.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="text-center">
-                    <span className="text-4xl font-bold">
-                      {formatCurrency(plan.price_weekly)}
-                    </span>
-                    <span className="text-muted-foreground">/week</span>
-                  </div>
-                  <ul className="space-y-3">
-                    {plan.features.slice(0, 5).map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button
-                    className="w-full"
-                    variant={plan.popular ? 'default' : 'outline'}
-                    asChild
-                  >
-                    <Link href={`/apply?plan=${plan.id}`}>Choose {plan.name}</Link>
-                  </Button>
-                </CardContent>
-              </Card>
+              </div>
             ))}
           </div>
-
-          <div className="text-center mt-12">
-            <Button variant="link" asChild>
-              <Link href="/pricing">
-                Compare all plan features
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
         </div>
-      </section>
+      </div>
+    </section>
+  )
+}
 
-      {/* Why Go-Moto */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-display font-bold mb-4">
-              Why riders choose Go-Moto
+/* ─────────────────────────────────────────────
+   PLATFORM FEATURES
+───────────────────────────────────────────── */
+function PlatformFeatures() {
+  const features = [
+    {
+      icon: Shield,
+      title: 'Fully Insured Fleet',
+      description: 'Every bike comes with comprehensive insurance. Ride with complete peace of mind.',
+    },
+    {
+      icon: Wrench,
+      title: 'Included Maintenance',
+      description: 'Scheduled services, repairs, and roadside support — all covered in your plan.',
+    },
+    {
+      icon: Zap,
+      title: 'Same-Day Approval',
+      description: 'Our streamlined process means you can be earning within 24 hours of applying.',
+    },
+    {
+      icon: MapPin,
+      title: 'Nationwide Coverage',
+      description: 'Serving Johannesburg, Cape Town, Durban, Pretoria, and expanding fast.',
+    },
+    {
+      icon: Users,
+      title: 'Rider Community',
+      description: 'Join 2,500+ riders. Access group training, tips, and peer support on WhatsApp.',
+    },
+    {
+      icon: Clock,
+      title: '24/7 Support',
+      description: 'Our team is always on call. WhatsApp, phone, or walk-in support available.',
+    },
+  ]
+
+  return (
+    <section className="bg-[#07080f] py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] hero-orb blur-3xl opacity-50 pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16" data-animate="fade-up">
+          <span className="badge-pill mb-6 inline-flex">Platform Benefits</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
+            Built for riders who{' '}
+            <span className="gradient-text-hero">earn for a living</span>
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">
+            Every feature is designed to keep you riding, earning, and growing — without the headaches.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {features.map((f) => (
+            <div key={f.title} className="hero-glass-card p-6 neon-border-hover transition-all duration-300 relative">
+              <div className="card-accent-line" />
+              <div className="w-10 h-10 rounded-xl bg-[#E53935]/12 flex items-center justify-center mb-4">
+                <f.icon className="h-5 w-5 text-[#E53935]" />
+              </div>
+              <h3 className="font-semibold text-white mb-2">{f.title}</h3>
+              <p className="text-sm text-white/50 leading-relaxed">{f.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   PRICING TEASER
+───────────────────────────────────────────── */
+function PricingTeaser() {
+  const plans = [
+    {
+      name: 'Starter',
+      price: 'R599',
+      period: '/week',
+      description: 'Perfect for new delivery riders. Start earning today.',
+      features: ['Daily/weekly rental', 'Included maintenance', 'Basic insurance', 'Rider support'],
+      cta: 'Get Started',
+      href: '/pricing',
+      featured: false,
+    },
+    {
+      name: 'Rent-to-Own',
+      price: 'R749',
+      period: '/week',
+      description: 'Build toward ownership. Every payment counts.',
+      features: ['Own your bike in 18–24 months', 'Full insurance coverage', 'Priority maintenance', 'Earn-back programme'],
+      cta: 'Apply Now',
+      href: '/apply',
+      featured: true,
+    },
+    {
+      name: 'Fleet',
+      price: 'Custom',
+      period: 'pricing',
+      description: 'Scalable solutions for logistics operators.',
+      features: ['10+ bike packages', 'Dedicated fleet manager', 'GPS tracking', 'Volume discounts'],
+      cta: 'Contact Us',
+      href: '/fleet',
+      featured: false,
+    },
+  ]
+
+  return (
+    <section className="bg-[#0a0b14] py-24 relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16" data-animate="fade-up">
+          <span className="badge-pill mb-6 inline-flex">Pricing</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
+            Simple, transparent{' '}
+            <span className="gradient-text-hero">pricing</span>
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">
+            No hidden fees. No lock-ins. Pay only for what you use.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`relative rounded-2xl p-7 flex flex-col transition-all duration-300 ${
+                plan.featured
+                  ? 'bg-[#E53935] text-white glow-red'
+                  : 'hero-glass-card neon-border-hover'
+              }`}
+            >
+              {plan.featured && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-white text-[#E53935] text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+              <div className="mb-6">
+                <h3 className={`font-display text-xl font-bold mb-1 ${plan.featured ? 'text-white' : 'text-white'}`}>
+                  {plan.name}
+                </h3>
+                <p className={`text-sm mb-4 ${plan.featured ? 'text-white/80' : 'text-white/50'}`}>
+                  {plan.description}
+                </p>
+                <div className="flex items-end gap-1">
+                  <span className={`font-display text-4xl font-bold ${plan.featured ? 'text-white' : 'text-white'}`}>
+                    {plan.price}
+                  </span>
+                  <span className={`text-sm pb-1 ${plan.featured ? 'text-white/70' : 'text-white/40'}`}>
+                    {plan.period}
+                  </span>
+                </div>
+              </div>
+              <ul className="space-y-3 flex-1 mb-7">
+                {plan.features.map((f) => (
+                  <li key={f} className="flex items-center gap-3 text-sm">
+                    <CheckCircle2
+                      className={`h-4 w-4 flex-shrink-0 ${plan.featured ? 'text-white' : 'text-[#E53935]'}`}
+                    />
+                    <span className={plan.featured ? 'text-white/90' : 'text-white/70'}>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button
+                asChild
+                className={
+                  plan.featured
+                    ? 'bg-white text-[#E53935] hover:bg-white/90 font-semibold w-full rounded-xl py-6'
+                    : 'bg-white/8 hover:bg-white/15 text-white border border-white/15 font-semibold w-full rounded-xl py-6'
+                }
+              >
+                <Link href={plan.href}>{plan.cta}</Link>
+              </Button>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-center text-white/30 text-sm mt-8">
+          All plans include maintenance, support and insurance.{' '}
+          <Link href="/pricing" className="text-[#E53935] hover:text-red-400 underline underline-offset-2">
+            View full pricing →
+          </Link>
+        </p>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   SERVICE & SUPPORT
+───────────────────────────────────────────── */
+function ServiceSupport() {
+  const options = [
+    {
+      icon: Wrench,
+      title: 'Book a Service',
+      description: 'Schedule maintenance, repairs or a roadworthy check at one of our service centres.',
+      cta: 'Book Now',
+      href: '/service',
+    },
+    {
+      icon: MessageCircle,
+      title: 'WhatsApp Support',
+      description: 'Chat directly with our team 7 days a week. Quick answers, real humans.',
+      cta: 'Chat Now',
+      href: `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '27123456789'}?text=Hi%20Go-Moto`,
+    },
+    {
+      icon: HeadphonesIcon,
+      title: 'Rider Helpdesk',
+      description: 'Access guides, FAQs, and documentation for everything from applications to bike care.',
+      cta: 'View Docs',
+      href: '/contact',
+    },
+  ]
+
+  return (
+    <section className="bg-[#07080f] py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16" data-animate="fade-up">
+          <span className="badge-pill mb-6 inline-flex">Support</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
+            We&apos;re here when{' '}
+            <span className="gradient-text-hero">you need us</span>
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto">
+            Go-Moto doesn&apos;t disappear after signup. We&apos;re with you every kilometer.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {options.map((opt) => (
+            <div key={opt.title} className="hero-glass-card p-7 text-center flex flex-col items-center neon-border-hover transition-all duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-[#E53935]/12 flex items-center justify-center mb-5">
+                <opt.icon className="h-7 w-7 text-[#E53935]" />
+              </div>
+              <h3 className="font-display text-lg font-bold text-white mb-2">{opt.title}</h3>
+              <p className="text-sm text-white/50 leading-relaxed mb-6 flex-1">{opt.description}</p>
+              <Button asChild variant="outline" className="border-white/15 text-white bg-white/5 hover:bg-white/10 rounded-xl w-full">
+                <Link href={opt.href}>{opt.cta}</Link>
+              </Button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────────────── */
+function Testimonials() {
+  const testimonials = [
+    {
+      quote:
+        "I applied on Monday, had my bike by Wednesday, and made my first delivery on Thursday. Go-Moto changed my life.",
+      name: 'Sipho M.',
+      role: 'Uber Eats Rider — Johannesburg',
+      rating: 5,
+    },
+    {
+      quote:
+        "As a fleet operator I've tried other platforms but nothing compares. The management tools, the maintenance support — it all just works.",
+      name: 'Andre van R.',
+      role: 'Fleet Manager — Cape Town',
+      rating: 5,
+    },
+    {
+      quote:
+        "The rent-to-own programme is incredible. I'm 8 months in and I can already see myself owning this bike outright. No stress.",
+      name: 'Thabo K.',
+      role: 'Mr D Food Rider — Pretoria',
+      rating: 5,
+    },
+  ]
+
+  return (
+    <section className="bg-[#0a0b14] py-24 relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16" data-animate="fade-up">
+          <span className="badge-pill mb-6 inline-flex">Testimonials</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
+            Trusted by riders{' '}
+            <span className="gradient-text-hero">across South Africa</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((t, i) => (
+            <div key={i} className="hero-glass-card p-7 flex flex-col relative neon-border-hover transition-all duration-300">
+              <div className="card-accent-line" />
+              {/* Stars */}
+              <div className="flex gap-1 mb-5">
+                {Array.from({ length: t.rating }).map((_, j) => (
+                  <Star key={j} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                ))}
+              </div>
+              <p className="text-white/75 text-base leading-relaxed flex-1 mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-[#E53935]/20 flex items-center justify-center">
+                  <span className="text-sm font-bold text-[#E53935]">
+                    {t.name.charAt(0)}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{t.name}</p>
+                  <p className="text-xs text-white/40">{t.role}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   PLATFORM SHOWCASE / STATS HIGHLIGHT
+───────────────────────────────────────────── */
+function PlatformShowcase() {
+  return (
+    <section className="bg-[#07080f] py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] hero-orb-blue blur-3xl opacity-40 pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] hero-orb blur-3xl opacity-40 pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="badge-pill mb-6 inline-flex">Platform</span>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-4">
+              The smartest way to manage{' '}
+              <span className="gradient-text-hero">your fleet</span>
             </h2>
-            <p className="text-muted-foreground">
-              We understand the gig economy. That's why we've built services specifically for riders.
+            <p className="text-white/50 text-lg max-w-xl mx-auto">
+              Go-Moto&apos;s platform gives fleet managers real-time visibility, maintenance tracking, and payment processing in one dashboard.
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Feature grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
             {[
-              {
-                icon: Shield,
-                title: 'No Credit Check',
-                description: 'We assess based on your earning potential, not your credit score.',
-              },
-              {
-                icon: Clock,
-                title: '24-48hr Approval',
-                description: 'Quick turnaround so you can get on the road faster.',
-              },
-              {
-                icon: Wrench,
-                title: 'Maintenance Included',
-                description: 'Focus on earning while we handle the servicing.',
-              },
-              {
-                icon: Bike,
-                title: 'Swap Bike Option',
-                description: 'Bike in for service? Get a replacement to keep earning.',
-              },
-            ].map((item, index) => (
-              <div key={index} data-animate="fade-up" className={`text-center p-6 stagger-${index + 1}`}>
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="h-7 w-7 text-primary" />
+              { icon: BarChart3, label: 'Real-time Analytics' },
+              { icon: MapPin, label: 'GPS Tracking' },
+              { icon: Wrench, label: 'Maintenance Alerts' },
+              { icon: BadgeCheck, label: 'Compliance Tools' },
+            ].map((item) => (
+              <div key={item.label} className="hero-glass-card p-5 text-center flex flex-col items-center gap-3 neon-border-hover transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl bg-white/6 flex items-center justify-center">
+                  <item.icon className="h-5 w-5 text-white/60" />
                 </div>
-                <h3 className="font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
+                <span className="text-xs font-medium text-white/60">{item.label}</span>
               </div>
             ))}
           </div>
+
+          {/* Platform CTA */}
+          <div className="hero-glass-card p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/50 to-transparent" />
+            <div className="absolute bottom-0 right-0 w-64 h-64 hero-orb blur-3xl opacity-30 pointer-events-none" />
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="font-display text-2xl font-bold text-white mb-2">
+                  Managing a fleet of 10+ bikes?
+                </h3>
+                <p className="text-white/50 text-sm">
+                  Get a custom demo and see how Go-Moto can cut your operational costs by up to 30%.
+                </p>
+              </div>
+              <Button asChild className="bg-[#E53935] hover:bg-[#C62828] text-white font-semibold px-8 py-6 rounded-xl whitespace-nowrap flex-shrink-0">
+                <Link href="/fleet">
+                  Request a Demo
+                  <Play className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
+  )
+}
 
-      {/* Testimonials */}
-      {testimonials && Array.isArray(testimonials) && testimonials.length > 0 && (
-        <section className="py-20 bg-muted/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div data-animate="fade-up" className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl font-display font-bold mb-4">
-                What our riders say
-              </h2>
-              <p className="text-muted-foreground">
-                Join hundreds of riders who are already earning with Go-Moto.
-              </p>
-            </div>
+/* ─────────────────────────────────────────────
+   NEWSLETTER — Autovent-style email capture
+───────────────────────────────────────────── */
+function NewsletterSection() {
+  return (
+    <section className="bg-[#07080f] py-20 relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#E53935]/25 to-transparent" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 hero-orb blur-3xl opacity-50 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#E53935]/5 via-transparent to-transparent pointer-events-none" />
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.slice(0, 3).map((testimonial: any, index: number) => (
-                <Card key={index} data-animate="fade-up" className={`card-hover stagger-${index + 1}`}>
-                  <CardContent className="pt-6">
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-5 w-5 ${
-                            i < testimonial.rating
-                              ? 'text-primary fill-primary'
-                              : 'text-muted-foreground/40'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground mb-6">
-                      "{testimonial.content}"
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <span className="text-sm font-semibold text-primary">
-                          {testimonial.name.charAt(0)}
-                        </span>
-                      </div>
-                      <div>
-                        <p className="font-medium">{testimonial.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {testimonial.platform} rider, {testimonial.location}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* FAQs */}
-      {faqs && Array.isArray(faqs) && faqs.length > 0 && (
-        <section className="py-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto">
-              <div data-animate="fade-up" className="text-center mb-12">
-                <h2 className="text-3xl font-display font-bold mb-4">
-                  Frequently asked questions
-                </h2>
-                <p className="text-muted-foreground">
-                  Got questions? We've got answers.
-                </p>
-              </div>
-
-              <Accordion data-animate="fade-up" type="single" collapsible className="w-full stagger-1">
-                {faqs.map((faq: any, index: number) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-
-              <div className="text-center mt-8">
-                <p className="text-muted-foreground mb-4">
-                  Still have questions?
-                </p>
-                <Button variant="outline" asChild>
-                  <a
-                    href={getWhatsAppUrl(whatsappNumber, 'Hi, I have a question about Go-Moto')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <MessageCircle className="mr-2 h-4 w-4" />
-                    Chat with us on WhatsApp
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 data-animate="fade-up" className="text-3xl font-display font-bold mb-4">
-            Ready to start earning?
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-2xl mx-auto text-center" data-animate="fade-up">
+          <span className="section-label">Stay in the Loop</span>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mt-8 mb-4 tracking-tight">
+            Exclusive deals,{' '}
+            <span className="gradient-text-hero">first</span>
           </h2>
-          <p data-animate="fade-up" className="text-lg text-white mb-8 max-w-xl mx-auto stagger-1">
-            Join hundreds of riders who are already on the road with Go-Moto. 
-            Apply today and get approved within 24-48 hours.
+          <p className="text-white/50 text-lg mb-10">
+            New bikes, pricing updates and rider tips delivered straight to your inbox.
           </p>
-          <div data-animate="fade-up" className="flex flex-col sm:flex-row gap-4 justify-center stagger-2">
-            <Button size="xl" variant="secondary" asChild className="bg-white text-primary hover:bg-white/90">
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="newsletter-email"
+              type="email"
+              placeholder="Your email address"
+              className="flex-1 bg-white/6 border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-[#E53935]/50 transition-colors text-sm"
+            />
+            <button
+              type="button"
+              aria-label="Subscribe to the Go-Moto newsletter"
+              className="btn-gradient px-6 py-3.5 rounded-xl font-semibold whitespace-nowrap text-sm"
+            >
+              Subscribe
+            </button>
+          </div>
+          <p className="text-white/25 text-xs mt-4">No spam. Unsubscribe anytime. POPIA compliant.</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   FINAL CTA
+───────────────────────────────────────────── */
+function FinalCTA() {
+  return (
+    <section className="bg-[#07080f] py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-40 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] hero-orb blur-3xl pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="font-display text-5xl sm:text-6xl font-bold text-white mb-6 leading-tight">
+            Ready to{' '}
+            <span className="gradient-text-hero">start earning?</span>
+          </h2>
+          <p className="text-white/55 text-xl mb-10 leading-relaxed">
+            Join thousands of riders who&apos;ve taken control of their income with Go-Moto. Apply in under 5 minutes.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-to-br from-[#E53935] to-[#FF5722] hover:from-[#C62828] hover:to-[#E64A19] text-white font-bold text-lg px-10 py-7 rounded-xl shadow-[0_4px_20px_rgba(229,57,53,0.35)] hover:shadow-[0_6px_28px_rgba(229,57,53,0.5)] transition-all duration-300 hover:scale-105"
+            >
               <Link href="/apply">
-                Apply Now
+                Apply Now — Free &amp; Fast
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="xl" variant="outline" className="bg-white text-primary border-white hover:bg-black hover:text-white hover:border-black" asChild>
-              <Link href="/inventory">
-                Browse Bikes
-              </Link>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white/20 text-white bg-white/5 hover:bg-white/10 text-lg font-semibold px-10 py-7 rounded-xl"
+            >
+              <Link href="/contact">Talk to a Specialist</Link>
             </Button>
           </div>
+
+          {/* Bottom trust */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-white/35 text-sm">
+            {['No credit checks', 'Same-day response', 'Cancel anytime', 'POPIA compliant'].map((item) => (
+              <span key={item} className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-[#E53935]/70" />
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   PAGE EXPORT
+───────────────────────────────────────────── */
+export default function HomePage() {
+  return (
+    <>
+      <ScrollAnimator />
+      <HeroSection />
+      <TrustBar />
+      <FeaturedBikes />
+      <CoreSolutions />
+      <HowItWorks />
+      <PlatformFeatures />
+      <PricingTeaser />
+      <ServiceSupport />
+      <PlatformShowcase />
+      <Testimonials />
+      <NewsletterSection />
+      <FinalCTA />
+    </>
   )
 }
