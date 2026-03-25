@@ -11,6 +11,7 @@ import { StatsGrid } from '@/components/ui/stats-counter'
 import { BrandMarquee } from '@/components/ui/brand-marquee'
 import { TestimonialCarousel } from '@/components/ui/testimonial-carousel'
 import { PricingCard } from '@/components/ui/pricing-card'
+import ScrollExpandMedia from '@/components/ui/scroll-expansion-hero'
 import { createClient } from '@/lib/supabase/server'
 import { formatCurrency, getWhatsAppUrl } from '@/lib/utils'
 import { PLANS } from '@/types/constants'
@@ -60,103 +61,50 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col bg-background">
-      {/* Hero Section - Autovent Style */}
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-background">
-        {/* Background elements */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-autovent-500/20 rounded-full blur-[150px]" />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-teal-500/15 rounded-full blur-[120px]" />
-        
-        {/* Decorative floating elements */}
-        <div className="absolute top-1/4 right-10 w-3 h-3 rounded-full bg-gradient-to-r from-autovent-500 to-teal-500 animate-pulse" />
-        <div className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-teal-500/50 animate-pulse" style={{ animationDelay: '1s' }} />
-        
-        <div className="container relative mx-auto px-4 py-32 sm:px-6 lg:px-8 lg:py-40 pt-40">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-10">
-              {/* Event-style date badge like Autovent */}
-              <div className="flex flex-wrap gap-4" data-animate="fade-up">
-                <Badge variant="outline" className="bg-autovent-500/10 text-autovent-400 border-autovent-500/30 px-4 py-2 text-sm font-medium">
-                  🏍️ Now in Johannesburg, Cape Town & Durban
-                </Badge>
-              </div>
-              
-              {/* Hero headline with Autovent typography */}
-              <h1 data-animate="fade-up" className="text-5xl font-display font-bold tracking-tight sm:text-6xl lg:text-7xl leading-[1.1] uppercase text-foreground">
-                <span className="text-line">Get Ready</span>{' '}
-                <span>to</span>{' '}
-                <span className="text-gradient">Experience</span>{' '}
-                <span className="text-foreground">the Road</span>
-              </h1>
-              
-              <p data-animate="fade-up" className="text-xl text-muted-foreground max-w-xl leading-relaxed">
-                The operating system for bike ownership & earning. Rent, buy, or rent-to-own 
-                bikes and scooters for delivery, commuting, or fleet operations.
-              </p>
-              
-              {/* CTA buttons */}
-              <div data-animate="fade-up" className="flex flex-col sm:flex-row gap-4">
-                <Button size="xl" asChild className="bg-gradient-to-r from-autovent-500 to-teal-500 border-0 hover:shadow-autovent-500/30">
-                  <Link href="/inventory">
-                    Get a Bike
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button size="xl" variant="outline" asChild>
-                  <Link href="/apply">
-                    Apply Now
-                  </Link>
-                </Button>
-              </div>
+      <ScrollExpandMedia
+        mediaType="image"
+        mediaSrc="/images/hero-foreground.png"
+        bgImageSrc="/images/hero-background.png"
+        title="GET READY TO EXPERIENCE THE ROAD"
+        date="Go-Moto South Africa"
+        scrollToExpand="Scroll to Expand"
+      >
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-8 flex flex-wrap justify-center gap-4">
+            <Badge variant="outline" className="bg-black/55 text-blue-100 border-blue-200/40 px-4 py-2 text-sm font-semibold shadow-[0_8px_26px_rgba(0,0,0,0.35)]">
+              Now in Johannesburg, Cape Town and Durban
+            </Badge>
+          </div>
 
-              {/* Trust Signals */}
-              <div className="flex flex-wrap gap-8 pt-6" data-animate="fade-up">
-                {[  
-                  'No credit check required',
-                  'Maintenance included',
-                  'Flexible weekly payments',
-                ].map((text) => (
-                  <div key={text} className="flex items-center gap-3 text-sm text-muted-foreground">
-                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center">
-                      <CheckCircle2 className="h-4 w-4 text-accent" />
-                    </div>
-                    <span>{text}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <p className="mx-auto mb-8 max-w-3xl text-center text-lg text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.7)]">
+            The operating system for bike ownership and earning. Rent, buy, or rent-to-own
+            bikes and scooters for delivery, commuting, or fleet operations.
+          </p>
 
-            {/* Hero Stats Card - Autovent style */}
-            <div className="relative hidden lg:block" data-animate="fade-left">
-              <div className="absolute -top-10 -right-10 w-80 h-80 bg-autovent-500/15 rounded-full blur-[100px]" />
-              <div className="relative z-10 glass rounded-3xl p-10 shadow-2xl">
-                <div className="grid grid-cols-2 gap-8">
-                  <div className="text-center p-6 rounded-2xl surface-muted">
-                    <p className="text-5xl font-bold text-gradient">500+</p>
-                    <p className="text-sm text-muted-foreground mt-2 font-medium uppercase tracking-wider">Active Riders</p>
-                  </div>
-                  <div className="text-center p-6 rounded-2xl surface-muted">
-                    <p className="text-5xl font-bold text-line">98%</p>
-                    <p className="text-sm text-muted-foreground mt-2 font-medium uppercase tracking-wider">On-Time Support</p>
-                  </div>
-                  <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 border border-primary/20">
-                    <p className="text-5xl font-bold text-gradient">R450</p>
-                    <p className="text-sm text-muted-foreground mt-2 font-medium uppercase tracking-wider">From /week</p>
-                  </div>
-                  <div className="text-center p-6 rounded-2xl surface-muted">
-                    <p className="text-5xl font-bold text-line">24hr</p>
-                    <p className="text-sm text-muted-foreground mt-2 font-medium uppercase tracking-wider">Approval Time</p>
-                  </div>
+          <div className="mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button size="xl" asChild className="bg-gradient-to-r from-blue-500 to-cyan-400 border-0 hover:shadow-blue-500/30">
+              <Link href="/inventory">
+                Get a Bike
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button size="xl" variant="outline" asChild className="border-blue-200/40 text-blue-100 hover:bg-blue-100/10">
+              <Link href="/apply">Apply Now</Link>
+            </Button>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]">
+            {['No credit check required', 'Maintenance included', 'Flexible weekly payments'].map((text) => (
+              <div key={text} className="flex items-center gap-3">
+                <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center">
+                  <CheckCircle2 className="h-4 w-4 text-cyan-300" />
                 </div>
+                <span>{text}</span>
               </div>
-            </div>
+            ))}
           </div>
         </div>
-        
-        {/* Gradient edge at bottom */}
-        <div className="de-gradient-edge-bottom" />
-      </section>
+      </ScrollExpandMedia>
 
       {/* Brand Marquee - Autovent Style */}
       <section className="bg-muted py-8 border-y border-border">
